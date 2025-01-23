@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>MinesweeperS</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Sixtyfour+Convergence&display=swap" rel="stylesheet">
+    <script type="module" src="game.js"></script>
+</head>
+<body>
+    <header>
+        <a href="../landing.html">
+            <h1>MinesweeperS</h1>
+        </a>
+    </header>
+    <div class="">
+        <div class="diffChoice">
+            <button class="difficulty" id="easy">EASY</button>
+            <button class="difficulty" id="medium">MEDIUM</button>
+            <button class="difficulty" id="hard">HARD</button>
+        </div>
+        <aside>
+            <div class="controls">
+                <div class="input-block">
+                    <p>Grid Size</p>
+                    <input id="grid-size" type="number" size="2" max="50" min="10" autocomplete="off">
+                </div>
+                <div class="input-block">
+                    <p>Bomb Count</p>
+                    <input id="bomb-count" type="number" size= "2" max="1000" min="15" autocomplete="off">
+                </div>
+                <div class="input-block">
+                   <p>New Game</p> 
+                    <button id="new-game">Start</button>
+                </div>
+            </div>
+           
+        </aside>
+        <main id="gameArea">
+            <div class="game-stats">
+                <span id="timer">Time: 0s</span>
+                <span id="bomb-counter">Bombs: 0</span>
+                <span id="flag-counter">Flags: 0</span>
+            </div>
+            <div class="flagControls">
+                <button id="toggle-flag">FLAG (SHFT)</button>
+            </div>
+            <div class="container">
+                <div id="grid"></div>
+            </div>
+        </main>
+    </div>
+
+</body>
+</html>

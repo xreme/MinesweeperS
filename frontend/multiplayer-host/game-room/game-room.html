@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<head>
+    <script src="https://unpkg.com/peerjs@1.5.4/dist/peerjs.min.js"></script>
+    <script src="game-room.js"></script>
+    <script src="host-server.js"></script>
+    <link href="game-room.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Sixtyfour+Convergence&display=swap" rel="stylesheet">
+</head>
+<body>
+    <a href="../../landing.html">HOME</a>
+    <h1>{Name}'s Room</h1>
+    <p>ROOM ID: <span id="host-id"></span></p>
+    <hr style="width: 100%;">
+    <p>Connected Clients: <span id="client-count">0</span></p>
+    <ul id="client-list"></ul>
+    <hr style="width: 100%;">
+    <div id="message-container"></div>
+</body>
