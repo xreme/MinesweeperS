@@ -19,19 +19,35 @@ document.addEventListener('DOMContentLoaded', () => {
     scrollToTop()
 });
 
-
-function initGame(){
-    let gridSize = parseInt(document.getElementById('grid-size').value) || 10;
-
-    if (gridSize < 5 || gridSize > 50){
-        gameDimensions[0] = 10;
-        gameDimensions[1] = 10;
-        console.log("dimensions set")
+function checkValues(){
+    let gridSize = parseInt(document.getElementById('grid-size').value);
+    let bombCount = parseInt(document.getElementById('bomb-count').value);
+    if (gridSize && gridSize > 50){
+        displayError("Grid size too large")
+        document.getElementById('grid-size').value = null
+        return false
+    }
+    else if(gridSize && gridSize < 10){
+        displayError("Grid size too small")
+        document.getElementById('grid-size').value = null
+        return false
+    }
+    else if (bombCount < 1){
+        displayError("Invalid Bomb Count")
+        document.getElementById('grid-size').value = null
+        return false
     }
     else{
-        gameDimensions[0] = gridSize;
-        gameDimensions[1] = gridSize;
+        return true
     }
+}
+function displayError(error){
+    document.getElementById('Error').textContent = error
+}
+function initGame(){
+    let gridSize = parseInt(document.getElementById('grid-size').value) || 10;
+    gameDimensions[0] = gridSize;
+    gameDimensions[1] = gridSize;
 
     let inputMineCount = parseInt(document.getElementById('bomb-count').value) || Math.floor((gridSize*gridSize) * 0.1);
     // Update global mineCount
@@ -39,20 +55,17 @@ function initGame(){
     if(mineCount > Math.floor((gridSize*gridSize) * 0.3)){
         mineCount = Math.floor((gridSize*gridSize) * 0.3);
     }
-
     
     game = minesweeper(gameDimensions[0], gameDimensions[1], mineCount);
     createGrid();
     startTimer();
     updateGameStats();
 }
-
 function startTimer() {
     if (timerInterval) clearInterval(timerInterval);
     startTime = Date.now();
     timerInterval = setInterval(updateGameStats, 1000);
 }
-
 function updateGameStats() {
     var timeElapsed = Math.floor((Date.now() - startTime) / 1000);
     flagsPlaced = game.flaggedTiles.length;
@@ -64,8 +77,6 @@ function updateGameStats() {
     document.getElementById('bomb-counter').textContent = `Bombs: ${remainingBombs}`;
     document.getElementById('flag-counter').textContent = `Flags: ${flagsPlaced}`;
 }
-
-
 function createGrid(){
     const grid = document.getElementById('grid');
     grid.innerHTML = '';
@@ -196,11 +207,14 @@ document.getElementById('toggle-flag').addEventListener('click', () => {
 });
 
 document.getElementById('new-game').addEventListener('click', () => {
-    initGame();
-    //console.log(game)
-    createGrid();
-    document.getElementById('gameArea').style.visibility = 'visible'
-    scrollToBottom()
+    if(checkValues()){
+        displayError("")
+        initGame();
+        console.log("true")
+        createGrid();
+        document.getElementById('gameArea').style.visibility = 'visible'
+        scrollToBottom()
+    }
 });
 window.addEventListener('keydown', (e) => {
     if (e.key === 'Shift' && !game.getFlagMode()) {
@@ -209,8 +223,7 @@ window.addEventListener('keydown', (e) => {
     }
 });
 
-window.addEventListener('keyup', (e) => {
-    if (e.key === 'Shift' && game.getFlagMode()) {
+window.addEventListener('keyup', (e) => {    if (e.key === 'Shift' && game.getFlagMode()) {
         game.toggleFlag();
         statusDisplay.style.backgroundColor = 'rgba(255, 103, 98, 0)'
     }

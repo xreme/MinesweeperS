@@ -12,7 +12,6 @@ export function minesweeper(width,length, gameBombCount){
     function generateBoard(){
         // Make an empty table
         let board = new Array(gridLength);
-
         for (let i = 0; i < board.length; i++){
             board[i] = new Array(gridWidth);
         }
