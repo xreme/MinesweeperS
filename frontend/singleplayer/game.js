@@ -34,7 +34,7 @@ function checkValues(){
     }
     else if (bombCount < 1){
         displayError("Invalid Bomb Count")
-        document.getElementById('grid-size').value = null
+        document.getElementById('bomb-count').value = null
         return false
     }
     else{
