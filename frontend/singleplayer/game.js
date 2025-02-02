@@ -17,6 +17,8 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('medium').addEventListener('click', () => setDifficulty('medium'));
     document.getElementById('hard').addEventListener('click', () => setDifficulty('hard'));
     scrollToTop()
+    updateWins()
+    updateGamePlayed()
 });
 
 function checkValues(){
@@ -81,15 +83,12 @@ function createGrid(){
     const grid = document.getElementById('grid');
     grid.innerHTML = '';
 
-    const maxGridSize = Math.max(gameDimensions[0], gameDimensions[1]);
-    const deviceWidth = window.innerWidth - 40
-    const deviceHeight = window.innerHeight - 40
-    let minSize = Math.min(deviceWidth, deviceHeight, 1000)
-    const calculatedSize = Math.max(30, Math.floor((minSize*0.85)/maxGridSize));
+    const { tileSize, containerSize } = calculateGridSize();
 
     const gridElement = document.getElementById('grid');
     gridElement.style.setProperty('--grid-cols', game.gridWidth);
-    gridElement.style.setProperty('--tile-size', `${calculatedSize}px`);
+    gridElement.style.setProperty('--tile-size', `${tileSize}px`);
+    gridElement.style.setProperty('--container-size', `${containerSize}px`);
     for(let i = 0; i < gameDimensions[0]; i++) {
         for(let j = 0; j < gameDimensions[1]; j++) {
             const tile = document.createElement('div');
@@ -100,6 +99,37 @@ function createGrid(){
             grid.appendChild(tile);
         }
     }
+}
+function calculateGridSize() {
+    // Get viewport dimensions
+    const vw = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0);
+    const vh = Math.max(document.documentElement.clientHeight || 0, window.innerHeight || 0);
+
+    // Calculate available space (accounting for UI elements)
+    const headerHeight = 100; // Adjust based on your header
+    const uiPadding = 40;
+    const availableWidth = vw - uiPadding;
+    const availableHeight = vh - headerHeight - uiPadding;
+
+    // Determine optimal container size
+    const maxContainerSize = Math.min(
+        availableWidth,
+        availableHeight,
+        1000 // Maximum allowed size
+    );
+
+    // Calculate tile size based on grid density
+    const gridDensity = Math.max(gameDimensions[0], gameDimensions[1]);
+    const minTileSize = 30; // Minimum tile size
+    const optimalTileSize = Math.max(
+        minTileSize,
+        Math.floor((maxContainerSize * 0.9) / gridDensity)
+    );
+
+    return {
+        tileSize: optimalTileSize,
+        containerSize: optimalTileSize * gridDensity
+    };
 }
 function handleClick(e) {
     const row = parseInt(e.target.dataset.row);
@@ -116,6 +146,7 @@ function handleClick(e) {
         } else if(result === 'winner') {
             showFullBoard();
             alert('You Win!');
+            addWin();
             return
         }
     }
@@ -209,8 +240,8 @@ document.getElementById('toggle-flag').addEventListener('click', () => {
 document.getElementById('new-game').addEventListener('click', () => {
     if(checkValues()){
         displayError("")
+        incrementGamesPlayedCounter()
         initGame();
-        console.log("true")
         createGrid();
         document.getElementById('gameArea').style.visibility = 'visible'
         scrollToBottom()
@@ -228,3 +259,46 @@ window.addEventListener('keyup', (e) => {    if (e.key === 'Shift' && game.getFl
         statusDisplay.style.backgroundColor = 'rgba(255, 103, 98, 0)'
     }
 });
+
+// stat tracking
+function updateWins(){
+    let winCount = localStorage.getItem("winCount");
+    let winCountDisplay = document.getElementById('wins');
+    console.log(winCount)
+    if(winCount){
+        winCountDisplay.textContent = 'Wins: ' + winCount;
+    }
+}
+function addWin(){
+    let winCount = localStorage.getItem("winCount");
+    if(winCount){
+        var winCountInt = parseInt(winCount);
+        winCountInt = winCountInt + 1;
+        localStorage.setItem("winCount", winCountInt)
+        updateWins()
+    }
+    else{
+        localStorage.setItem("winCount", "1")
+        updateWins()
+    }
+}
+function updateGamePlayed(){
+    let gamesPlayed= localStorage.getItem("gamesPlayed");
+    let gamesPlayedDisplay = document.getElementById('gamesPlayed');
+    if(gamesPlayed){
+        gamesPlayedDisplay.textContent = 'Game Played: ' + gamesPlayed;
+    }
+}
+function incrementGamesPlayedCounter(){
+    let gamesCount= localStorage.getItem("gamesPlayed");
+    if(gamesCount){
+        var gamesCountInt= parseInt(gamesCount);
+        gamesCountInt = gamesCountInt+ 1;
+        localStorage.setItem("gamesPlayed", gamesCountInt);
+        updateGamePlayed();
+    }
+    else{
+        localStorage.setItem("gamesPlayed", "1")
+        updateWins()
+    }
+}

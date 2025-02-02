@@ -10,12 +10,19 @@
 
 </head>
 <body>
-    <h1>
-        CLIENT
+    <h1 id="roomDisplay">
+        CONNECTING... 
     </h1>
-    <input type="text" id="host-id" placeholder="Enter host ID">
-    <button id="connect-btn">Connect</button>
-    <!-- Add new message input and send button -->
-    <input type="text" id="message-input" placeholder="Enter message">
-    <button id="send-btn">Send</button>
+    <div id="chat">
+        <h1 id="chatHeader">
+            CHAT
+        </h1>
+        <div id="message-container">
+        </div>
+        <hr>
+        <div id="chat-inputs">
+            <input id="message-input" autocomplete="off"><button id="sendChat">SEND</button>
+        </div>
+    </div>
+    
 </body>

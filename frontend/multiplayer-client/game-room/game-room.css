@@ -4,9 +4,11 @@
     --reveal-color: #ddddddce;
 }
 *{
-    color: white;
-    font-family: Sixtyfour Convergence; 
-    /* outline: 1px solid blue; */
+    *{
+        color: var(--c2);
+        font-family: Sixtyfour Convergence; 
+        /* outline: 1px solid blue; */
+    }
 }
 body{
     background-color: rgb(42, 42, 42);
@@ -26,13 +28,19 @@ body *{
 h1, h2, h3,p{
     font-family: Sixtyfour Convergence, Arial, Helvetica, sans-serif; 
 }
-input, select{
+input, select, button{
     background-color: rgba(0, 0, 0, 0);
     border: none;
     color: var(--c2);
     font-family: Sixtyfour Convergence, Arial, Helvetica, sans-serif; 
     border: 2px solid rgb(255, 104, 98);
     padding: 5px;
+}
+button{
+    cursor: pointer;
+}
+input{
+    width: 100%;
 }
 main{
     display: flex;
@@ -42,19 +50,53 @@ main{
     align-items: center;
 
 }
-#selection-items{
-    outline: solid var(--c2) 1px;
-    padding: 10px;
-}
-button{
-    background-color:rgba(0, 0, 0, 0);
-    border: 2px solid var(--c2);
+hr{
     color: var(--c2);
-    margin-top: 20px;
-    height: 100%;
-    width: 100%;
-    padding: 5px; 
+    border-color: var(--c2);
 }
 button:hover{
     background-color: rgba(255, 103, 98, 0.11);
+}
+#chatHeader{
+    margin-top: 0;
+}
+#chat{
+    outline: solid var(--c2) 1px;
+    width: 80%;
+    min-height: 200px;
+    padding: 20px;
+}
+#message-container{
+    margin-bottom: 10px;
+    text-align: left;
+}
+.message{
+    margin: 0;
+    line-height: 0;
+    display: flex;
+    font-size: small;
+    padding: 0;
+}
+.message .sender {
+    font-weight: bold;
+    min-width: 120px;
+    color: var(--c2);
+}
+
+.message .content {
+    flex: 1;
+}
+
+#message-container {
+    height: 100px;
+    overflow-y: auto;
+    padding: 10px;
+    border: 1px solid var(--c2);
+    background-color: #ffffff0b;
+}
+#chat-inputs {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    padding: 10px;
 }

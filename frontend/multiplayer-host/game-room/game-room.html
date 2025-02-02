@@ -10,11 +10,20 @@
 </head>
 <body>
     <a href="../../landing.html">HOME</a>
-    <h1>{Name}'s Room</h1>
+    <h1> Game Room</h1>
     <p>ROOM ID: <span id="host-id"></span></p>
-    <hr style="width: 100%;">
+    <div id="room-details"></div>
     <p>Connected Clients: <span id="client-count">0</span></p>
-    <ul id="client-list"></ul>
-    <hr style="width: 100%;">
-    <div id="message-container"></div>
+    <!-- <ul id="client-list"></ul> -->
+    <div id="chat">
+        <h1 id="chatHeader">
+            CHAT
+        </h1>
+        <div id="message-container">
+        </div>
+        <hr>
+        <div id="chat-inputs">
+            <input id="message-input" autocomplete="off"><button id="sendChat">SEND</button>
+        </div>
+    </div>
 </body>
