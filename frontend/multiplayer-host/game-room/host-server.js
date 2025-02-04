@@ -33,7 +33,7 @@ function getPeerConfig() {
 
 
 const playerName = sessionStorage.getItem('playerName');
-const roomCode = generateRoomCode(playerName.toUpperCase().substring(0,4))
+const roomCode = generateRoomCode()
 
 const config = getPeerConfig() || null
 console.log(config)
@@ -60,9 +60,9 @@ document.addEventListener('DOMContentLoaded', () => {
     })
 
 })
-function generateRoomCode(name) {
+function generateRoomCode() {
     const randomDigits = Math.floor(1000 + Math.random() * 9000);
-    return `MSS-${name}-${randomDigits}`;
+    return `${randomDigits}`;
 }
 
 function appendMessage(sender, message) {
