@@ -7,7 +7,9 @@ const iceConfig = {
               credential: "",
             },
         ],
-    }
+    },
+    debug: 3,
+    secure: true
 };
 function getPeerConfig() {
     try {
@@ -63,6 +65,9 @@ document.addEventListener('DOMContentLoaded', () => {
     clientPeer.on('open', (id) => {
         console.log(`Client ready. ID: ${id}`);
         connectToHost();
+    });
+    clientPeer.on('icecandidate', (candidate) => {
+        console.log('ICE Candidate:', candidate);
     });
 
     function sendDetails(){
