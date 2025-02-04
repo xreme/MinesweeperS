@@ -1,44 +1,43 @@
-const iceConfig = {
-    config: {
-        iceServers: [
-            {
-              urls: "turn:global.relay.metered.ca:80",
-              username: "",
-              credential: "",
-            },
-        ],
-    },
-    debug: 3,
-    secure: true
-};
-function getPeerConfig() {
-    try {
-        const turnConfig = JSON.parse(localStorage.getItem('turnConfig'));
-        if (turnConfig && turnConfig.username && turnConfig.password) {
-            iceConfig.config.iceServers[0].username = turnConfig.username;
-            iceConfig.config.iceServers[0].credential = turnConfig.password;
-            
-            console.log('Using custom ICE configuration with TURN');
-            return iceConfig;
-        }
-    } catch (error) {
-        console.error('Error parsing TURN config:', error);
-    }
-    console.log('Using default STUN-only configuration');
-    return null;
-}
-
-const config = getPeerConfig() | null
-console.log(config)
-const clientPeer = config ? new Peer(config): new Peer()
-
-//const clientPeer = new Peer();
-let activeConnection;
-var hostInfo = null;
-
-const playerName = sessionStorage.getItem('playerName') || 'Unknown'
-
 document.addEventListener('DOMContentLoaded', () => {
+    const playerName = sessionStorage.getItem('playerName') || 'Unknown'
+    const iceConfig = {
+        config: {
+            iceServers: [
+                {
+                  urls: "turn:global.relay.metered.ca:80",
+                  username: "",
+                  credential: "",
+                },
+            ],
+        },
+        debug: 3,
+        secure: true
+    };
+    function getPeerConfig() {
+        try {
+            const turnConfig = JSON.parse(localStorage.getItem('turnConfig'));
+            if (turnConfig && turnConfig.username && turnConfig.password) {
+                iceConfig.config.iceServers[0].username = turnConfig.username;
+                iceConfig.config.iceServers[0].credential = turnConfig.password;
+                
+                console.log('Using custom ICE configuration with TURN');
+                return iceConfig;
+            }
+        } catch (error) {
+            console.error('Error parsing TURN config:', error);
+        }
+        console.log('Using default STUN-only configuration');
+        return null;
+    }
+    
+    const config = getPeerConfig() || null
+    console.log(config)
+    const clientPeer = config ? new Peer(config): new Peer()
+    console.log(clientPeer)
+    
+    //const clientPeer = new Peer();
+    let activeConnection;
+    var hostInfo = null;
     const hostId = sessionStorage.getItem('roomCode');
     const sendBtn = document.getElementById("sendChat")
 
@@ -68,6 +67,9 @@ document.addEventListener('DOMContentLoaded', () => {
     });
     clientPeer.on('icecandidate', (candidate) => {
         console.log('ICE Candidate:', candidate);
+    });
+    clientPeer.on('error', (err) => {
+        console.error('Peer error:', err);
     });
 
     function sendDetails(){

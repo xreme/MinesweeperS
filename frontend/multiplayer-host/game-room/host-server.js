@@ -35,7 +35,7 @@ function getPeerConfig() {
 const playerName = sessionStorage.getItem('playerName');
 const roomCode = generateRoomCode(playerName.toUpperCase().substring(0,4))
 
-const config = getPeerConfig() | null
+const config = getPeerConfig() || null
 console.log(config)
 const hostPeer = config ? new Peer(config): new Peer(roomCode)
 
