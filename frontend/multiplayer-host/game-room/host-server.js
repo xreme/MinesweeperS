@@ -1,9 +1,48 @@
+const iceConfig = {
+    config: {
+        iceServers: [
+            {
+              urls: "turn:global.relay.metered.ca:80",
+              username: "",
+              credential: "",
+            },
+        ],
+    }
+};
+
+function getPeerConfig() {
+    try {
+        const turnConfig = JSON.parse(localStorage.getItem('turnConfig'));
+        if (turnConfig && turnConfig.username && turnConfig.password) {
+            iceConfig.config.iceServers[0].username = turnConfig.username;
+            iceConfig.config.iceServers[0].credential = turnConfig.password;
+            
+            console.log('Using custom ICE configuration with TURN');
+            return {
+                ...iceConfig,
+                id: roomCode,
+                debug: 3
+            };
+        }
+    } catch (error) {
+        console.error('Error parsing TURN config:', error);
+    }
+    console.log('Using default STUN-only configuration');
+    return null;
+}
+
+
 const playerName = sessionStorage.getItem('playerName');
 const roomCode = generateRoomCode(playerName.toUpperCase().substring(0,4))
-const hostPeer = new Peer(roomCode);
+
+const config = getPeerConfig() | null
+console.log(config)
+const hostPeer = config ? new Peer(config): new Peer(roomCode)
+
 const connections = new Map(); // Store client connections
 const clientInfo = new Map();
 var sendBtn = null;
+
 document.addEventListener('DOMContentLoaded', () => {
     sendBtn = document.getElementById("sendChat")
     sendBtn.addEventListener('click', () => {
