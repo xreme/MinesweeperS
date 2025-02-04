@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 function copyJoinLink() {
     const roomCode = document.getElementById('host-id').textContent;
-    const joinURL = `${window.location.origin}/frontend/multiplayer-client/join-room/join-room.html?room=${roomCode}`;
+    const joinURL = `${window.location.origin}/MinesweeperS/frontend/multiplayer-client/join-room/join-room.html?room=${roomCode}`;
     
     navigator.clipboard.writeText(joinURL)
         .then(() => {
