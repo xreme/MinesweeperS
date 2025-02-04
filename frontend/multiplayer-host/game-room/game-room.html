@@ -3,6 +3,7 @@
     <script src="https://unpkg.com/peerjs@1.5.4/dist/peerjs.min.js"></script>
     <script src="game-room.js"></script>
     <script src="host-server.js"></script>
+    <link href="gameboard-styles.css" rel="stylesheet">
     <link href="game-room.css" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -12,6 +13,9 @@
     <a href="../../landing.html">HOME</a>
     <h1> Game Room</h1>
     <p>ROOM ID: <span id="host-id"></span></p>
+
+    <button id="copy-join-link" onclick="copyJoinLink()">Copy Link</button>
+
     <div id="room-details"></div>
     <p>Connected Clients: <span id="client-count">0</span></p>
     <!-- <ul id="client-list"></ul> -->
@@ -25,5 +29,34 @@
         <div id="chat-inputs">
             <input id="message-input" autocomplete="off"><button id="sendChat">SEND</button>
         </div>
+        
     </div>
+    
+    <!-- <div class="controls">
+        <div class="input-block">
+            <p>Grid Size</p>
+            <input id="grid-size" type="number" size="2" max="50" min="10" autocomplete="off">
+        </div>
+        <div class="input-block">
+            <p>Bomb Count</p>
+            <input id="bomb-count" type="number" size= "2" max="1000" min="10" autocomplete="off">
+        </div>
+        <div class="input-block">
+           <p>New Game</p> 
+            <button id="new-game">Start</button>
+        </div>
+    </div>
+    <main id="gameArea">
+        <div class="game-stats">
+            <span id="timer">Time: 0s</span>
+            <span id="bomb-counter">Bombs: 0</span>
+            <span id="flag-counter">Flags: 0</span>
+        </div>
+        <div class="flagControls">
+            <button id="toggle-flag">FLAG (SHFT)</button>
+        </div>
+        <div class="container">
+            <div id="grid"></div>
+        </div>
+    </main> -->
 </body>

@@ -100,3 +100,16 @@ button:hover{
     align-items: center;
     padding: 10px;
 }
+
+#copy-join-link {
+    padding: 8px 16px;
+    margin: 10px 0;
+    border: 1px solid var(--c2);
+    background: transparent;
+    color: var(--c2);
+    cursor: pointer;
+}
+
+#copy-join-link:hover {
+    background: rgba(255, 103, 98, 0.355);
+}

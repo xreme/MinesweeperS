@@ -3,6 +3,13 @@ document.addEventListener('DOMContentLoaded', () => {
     const nameInput = document.getElementById("name")
     const roomInput = document.getElementById("roomCode")
     
+    // Check URL parameters
+    const urlParams = new URLSearchParams(window.location.search);
+    const roomCode = urlParams.get('room');
+    if (roomCode) {
+        roomInput.value = roomCode;
+    }
+
     joinBtn.addEventListener('click', (e) => {
         e.preventDefault();
         

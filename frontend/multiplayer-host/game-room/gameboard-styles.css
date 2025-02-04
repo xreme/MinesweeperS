@@ -28,8 +28,6 @@ main{
     align-items: center;
     justify-content: center;
     gap: 0px;
-    height: 100vh;
-    visibility: hidden;
 }
 h1{
     font-size: 3rem;
