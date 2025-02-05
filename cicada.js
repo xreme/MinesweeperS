@@ -1,14 +1,16 @@
-export function minesweeper(width,length, gameBombCount){
+export function minesweeper(width,length, gameBombCount, inputGrid = null ){
     const gridWidth = width;
     const gridLength = length;
     const bombCount = gameBombCount
-    const grid = generateBoard()
+    const grid = inputGrid || generateBoard()
     calculateMines()
     const revealedTiles = []
     const flaggedTiles = []
     var flagMode = false
     var initReveal = true
 
+    // should add in seeded generation, so no need to send 
+    // entire board
     function generateBoard(){
         // Make an empty table
         let board = new Array(gridLength);

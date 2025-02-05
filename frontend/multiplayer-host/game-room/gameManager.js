@@ -11,7 +11,7 @@ export function handleStart(){
             startVSGame()
             break;
         default:
-            return
+            return;
     }
 }
 function displayError(error){
@@ -56,9 +56,15 @@ function startVSGame(){
     var game = minesweeper(gridInput,gridInput, mineCount);
 
     announce(`New Game – ${gridInput}x${gridInput} | ${mineCount} bombs`)
+    
+    broadcast({
+        header: "startGame",
+        body:{
+            gamemode: "VS",
+            gameInstance: game
+        }
+    })
     startGame(game, (data)=>handleWin(data), (data)=>handleLoss(data))
-
-
 }
 function announce(msg){
     broadcast({

@@ -1,12 +1,15 @@
 <!DOCTYPE html>
 <head>
 <script src="https://unpkg.com/peerjs@1.4.7/dist/peerjs.min.js"></script>
+<script type="module" src="game-client.js"></script>
+<script type="module" src="game-manager.js"></script>
+<script type="module" src="game-room.js"></script>
+<script type="module" src="gameboard.js"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Sixtyfour+Convergence&display=swap" rel="stylesheet">
-
-<script src="game-client.js"></script>
 <link rel="stylesheet" href="game-room.css">
+<link rel="stylesheet" href="gameboard-styles.css">
 
 </head>
 <body>
@@ -24,5 +27,18 @@
             <input id="message-input" autocomplete="off"><button id="sendChat">SEND</button>
         </div>
     </div>
+    <main id="gameArea">
+        <div class="game-stats">
+            <span id="timer">Time: 0s</span>
+            <span id="bomb-counter">Bombs: 0</span>
+            <span id="flag-counter">Flags: 0</span>
+        </div>
+        <div class="flagControls">
+            <button id="toggle-flag">FLAG (SHFT)</button>
+        </div>
+        <div class="container">
+            <div id="grid"></div>
+        </div>
+    </main>
     
 </body>

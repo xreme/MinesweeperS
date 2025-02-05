@@ -38,10 +38,10 @@ function getPeerConfig() {
     return null;
 }
 function generateRoomCode() {
-    const randomDigits = Math.floor(1000 + Math.random() * 9000);
+    //const randomDigits = Math.floor(1000 + Math.random() * 9000);
+    const randomDigits = 1000
     return `${randomDigits}`;
 }
-
 
 export function appendMessage(sender, message) {
     const messageContainer = document.getElementById('message-container');
@@ -109,6 +109,26 @@ function handleChat(peerID, message){
         appendMessage(senderInfo.name,msg)
     }
 }
+function handleGameResult(peerId, data){
+    console.log(data)
+    let msg = ''
+    if(data.result == 'win'){
+        let playerInfo = clientInfo.get(peerId)
+        msg = `${playerInfo.name} finished in ${data.time}s`
+    }
+    else if (data.result == 'lost'){
+        let playerInfo = clientInfo.get(peerId)
+        msg = `${playerInfo.name} lost in ${data.time}s` 
+    }
+    broadcast({
+        header:"chatMessage",
+        body:{
+            from:"[SERVER]",
+            messageContent: `${msg}`
+        }
+    })
+    appendMessage("[SERVER]", msg)
+}
 function initializeConnection(connection) {
     connection.on('open', () => {
         sendDetails(connection, {
@@ -155,8 +175,11 @@ function handleData(connection,data){
         case 'chatMessage':
             handleChat(connection.peer, obj.body)
             break;
-            default:
-                connection.send("Unknown Command")
+        case 'gameResult':
+            handleGameResult(connection.peer, obj.body)
+            break;
+        default:
+            connection.send("Unknown Command")
     }
 }
 export function broadcast(data){
