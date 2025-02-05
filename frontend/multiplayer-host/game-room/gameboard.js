@@ -1,67 +1,22 @@
-import { minesweeper } from '../../cicada.js';
-// default values
-var gameDimensions = [10,10];
-var mineCount = 20;
-var game = minesweeper(gameDimensions[0],gameDimensions[1], mineCount);
-const statusDisplay = document.getElementById('toggle-flag');
-var allowPlay = true;
+var game = null;;
 var flagsPlaced;
 var remainingBombs;
-
-
+var allowPlay = true;
 let startTime;
 let timerInterval;
+let statusDisplay = document.getElementById('toggle-flag');
 
-document.addEventListener('DOMContentLoaded', () => {
-    document.getElementById('easy').addEventListener('click', () => setDifficulty('easy'));
-    document.getElementById('medium').addEventListener('click', () => setDifficulty('medium'));
-    document.getElementById('hard').addEventListener('click', () => setDifficulty('hard'));
-    scrollToTop()
-    updateWins()
-    updateGamePlayed()
-});
+var handleLoss = null
+var handleWin = null
 
-function checkValues(){
-    let gridSize = parseInt(document.getElementById('grid-size').value);
-    let bombCount = parseInt(document.getElementById('bomb-count').value);
-    if (gridSize && gridSize > 50){
-        displayError("Grid size too large")
-        document.getElementById('grid-size').value = null
-        return false
-    }
-    else if(gridSize && gridSize < 10){
-        displayError("Grid size too small")
-        document.getElementById('grid-size').value = null
-        return false
-    }
-    else if (bombCount < 1){
-        displayError("Invalid Bomb Count")
-        document.getElementById('bomb-count').value = null
-        return false
-    }
-    else{
-        return true
-    }
-}
-function displayError(error){
-    document.getElementById('Error').textContent = error
-}
-function initGame(){
-    let gridSize = parseInt(document.getElementById('grid-size').value) || 10;
-    gameDimensions[0] = gridSize;
-    gameDimensions[1] = gridSize;
-
-    let inputMineCount = parseInt(document.getElementById('bomb-count').value) || Math.floor((gridSize*gridSize) * 0.1);
-    // Update global mineCount
-    mineCount = inputMineCount;
-    if(mineCount > Math.floor((gridSize*gridSize) * 0.3)){
-        mineCount = Math.floor((gridSize*gridSize) * 0.3);
-    }
-    
-    game = minesweeper(gameDimensions[0], gameDimensions[1], mineCount);
-    createGrid();
-    startTimer();
-    updateGameStats();
+export function startGame(newGame, winCallback, loseCallback){
+    console.log("Initializing game")
+    game = newGame
+    handleLoss = loseCallback
+    handleWin = winCallback
+    console.log(game)
+    createGrid()
+    startTimer()
 }
 function startTimer() {
     if (timerInterval) clearInterval(timerInterval);
@@ -71,10 +26,8 @@ function startTimer() {
 function updateGameStats() {
     var timeElapsed = Math.floor((Date.now() - startTime) / 1000);
     flagsPlaced = game.flaggedTiles.length;
-    remainingBombs = mineCount - flagsPlaced;
-//    console.log("stsats") 
-//    console.log(gameDimensions)
-//    console.log(mineCount)
+    remainingBombs = game.bombCount - flagsPlaced;
+
     document.getElementById('timer').textContent = `Time: ${timeElapsed}s`;
     document.getElementById('bomb-counter').textContent = `Bombs: ${remainingBombs}`;
     document.getElementById('flag-counter').textContent = `Flags: ${flagsPlaced}`;
@@ -89,8 +42,8 @@ function createGrid(){
     gridElement.style.setProperty('--grid-cols', game.gridWidth);
     gridElement.style.setProperty('--tile-size', `${tileSize}px`);
     gridElement.style.setProperty('--container-size', `${containerSize}px`);
-    for(let i = 0; i < gameDimensions[0]; i++) {
-        for(let j = 0; j < gameDimensions[1]; j++) {
+    for(let i = 0; i < game.gridLength; i++) {
+        for(let j = 0; j < game.gridWidth; j++) {
             const tile = document.createElement('div');
             tile.className = 'tile';
             tile.dataset.row = i;
@@ -119,7 +72,7 @@ function calculateGridSize() {
     );
 
     // Calculate tile size based on grid density
-    const gridDensity = Math.max(gameDimensions[0], gameDimensions[1]);
+    const gridDensity = Math.max(game.gridLength, game.gridWidth);
     const minTileSize = 30; // Minimum tile size
     const optimalTileSize = Math.max(
         minTileSize,
@@ -140,17 +93,30 @@ function handleClick(e) {
     } else {
         const result = game.clickTile([row, col]);
         if(result === 'x') {
-            showFullBoard();
-            alert('Game Over!');
-            return
+            lose()
+            return;
         } else if(result === 'winner') {
-            showFullBoard();
-            alert('You Win!');
-            addWin();
+            win()
             return
         }
     }
     updateBoard();
+}
+function lose(){
+    showFullBoard();
+    var timeElapsed = Math.floor((Date.now() - startTime) / 1000);
+    handleLoss({
+        result: 'lost',
+        time: timeElapsed
+    });
+}
+function win(){
+    showFullBoard();
+    var timeElapsed = Math.floor((Date.now() - startTime) / 1000);
+    handleWin({
+        result: 'win',
+        time: timeElapsed
+    });
 }
 function updateBoard() {
     const tiles = document.querySelectorAll('.tile');
@@ -203,23 +169,6 @@ function showFullBoard(){
     clearInterval(timerInterval);
     scrollToTop()
 }
-
-function setDifficulty(level) {
-switch(level) {
-    case 'easy':
-        document.getElementById('grid-size').value = 10;
-        document.getElementById('bomb-count').value = 10;
-        break;
-    case 'medium':
-        document.getElementById('grid-size').value = 16;
-        document.getElementById('bomb-count').value = 40;
-        break;
-    case 'hard':
-        document.getElementById('grid-size').value = 30;
-        document.getElementById('bomb-count').value = 99;
-        break;
-    }
-}
 function scrollToBottom() {
     window.scrollTo({
         top: document.documentElement.scrollHeight,
@@ -232,20 +181,11 @@ function scrollToTop() {
         behavior: 'smooth'
     });
 }
+
+
 document.getElementById('toggle-flag').addEventListener('click', () => {
     game.toggleFlag();
     statusDisplay.style.backgroundColor= (game.getFlagMode() ? 'rgba(255, 103, 98, 0.11)' : 'rgba(255, 103, 98, 0)')
-});
-
-document.getElementById('new-game').addEventListener('click', () => {
-    if(checkValues()){
-        displayError("")
-        incrementGamesPlayedCounter()
-        initGame();
-        createGrid();
-        document.getElementById('gameArea').style.visibility = 'visible'
-        scrollToBottom()
-    }
 });
 window.addEventListener('keydown', (e) => {
     if (e.key === 'Shift' && !game.getFlagMode()) {
@@ -258,46 +198,3 @@ window.addEventListener('keyup', (e) => {    if (e.key === 'Shift' && game.getFl
         statusDisplay.style.backgroundColor = 'rgba(255, 103, 98, 0)'
     }
 });
-
-// stat tracking
-function updateWins(){
-    let winCount = localStorage.getItem("winCount");
-    let winCountDisplay = document.getElementById('wins');
-    console.log(winCount)
-    if(winCount){
-        winCountDisplay.textContent = 'Wins: ' + winCount;
-    }
-}
-function addWin(){
-    let winCount = localStorage.getItem("winCount");
-    if(winCount){
-        var winCountInt = parseInt(winCount);
-        winCountInt = winCountInt + 1;
-        localStorage.setItem("winCount", winCountInt)
-        updateWins()
-    }
-    else{
-        localStorage.setItem("winCount", "1")
-        updateWins()
-    }
-}
-function updateGamePlayed(){
-    let gamesPlayed= localStorage.getItem("gamesPlayed");
-    let gamesPlayedDisplay = document.getElementById('gamesPlayed');
-    if(gamesPlayed){
-        gamesPlayedDisplay.textContent = 'Game Played: ' + gamesPlayed;
-    }
-}
-function incrementGamesPlayedCounter(){
-    let gamesCount= localStorage.getItem("gamesPlayed");
-    if(gamesCount){
-        var gamesCountInt= parseInt(gamesCount);
-        gamesCountInt = gamesCountInt+ 1;
-        localStorage.setItem("gamesPlayed", gamesCountInt);
-        updateGamePlayed();
-    }
-    else{
-        localStorage.setItem("gamesPlayed", "1")
-        updateWins()
-    }
-}

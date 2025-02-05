@@ -9,6 +9,13 @@ const iceConfig = {
         ],
     }
 };
+const playerName = sessionStorage.getItem('playerName');
+const roomCode = generateRoomCode()
+const config = getPeerConfig() || null
+const hostPeer = config ? new Peer(config): new Peer(roomCode)
+const connections = new Map(); // Store client connections
+const clientInfo = new Map();
+var sendBtn = null;
 
 function getPeerConfig() {
     try {
@@ -30,42 +37,13 @@ function getPeerConfig() {
     console.log('Using default STUN-only configuration');
     return null;
 }
-
-
-const playerName = sessionStorage.getItem('playerName');
-const roomCode = generateRoomCode()
-
-const config = getPeerConfig() || null
-console.log(config)
-const hostPeer = config ? new Peer(config): new Peer(roomCode)
-
-const connections = new Map(); // Store client connections
-const clientInfo = new Map();
-var sendBtn = null;
-
-document.addEventListener('DOMContentLoaded', () => {
-    sendBtn = document.getElementById("sendChat")
-    sendBtn.addEventListener('click', () => {
-        const message = document.getElementById('message-input').value;
-        sendChat(message)
-        document.getElementById('message-input').value = '';
-    });
-
-    window.addEventListener('keypress', (e)=>{
-        if (e.key === 'Enter'){
-            const message = document.getElementById('message-input').value;
-            sendChat(message)
-            document.getElementById('message-input').value = ''; 
-        }
-    })
-
-})
 function generateRoomCode() {
     const randomDigits = Math.floor(1000 + Math.random() * 9000);
     return `${randomDigits}`;
 }
 
-function appendMessage(sender, message) {
+
+export function appendMessage(sender, message) {
     const messageContainer = document.getElementById('message-container');
     const messageElement = document.createElement('div');
     const contentElement = document.createElement('p')
@@ -181,14 +159,13 @@ function handleData(connection,data){
                 connection.send("Unknown Command")
     }
 }
-function broadcast(data){
-    obj = JSON.stringify(data)
+export function broadcast(data){
+    let obj = JSON.stringify(data)
     // Broadcast to all connected clients
     connections.forEach((conn) => {
         conn.send(obj);
     });
 }
-
 function sendChat(message){
     if(message){
         let data = {
@@ -202,7 +179,22 @@ function sendChat(message){
         appendMessage(playerName, message)
     }
 }
-    
+document.addEventListener('DOMContentLoaded', () => {
+    sendBtn = document.getElementById("sendChat")
+    sendBtn.addEventListener('click', () => {
+        const message = document.getElementById('message-input').value;
+        sendChat(message)
+        document.getElementById('message-input').value = '';
+    });
+    window.addEventListener('keypress', (e)=>{
+        if (e.key === 'Enter'){
+            const message = document.getElementById('message-input').value;
+            sendChat(message)
+            document.getElementById('message-input').value = ''; 
+        }
+    })
+
+})
 hostPeer.on('connection', (connection) => {
     console.log(`Attempted Connection: ${connection.peer}`);
     connections.set(connection.peer, connection);

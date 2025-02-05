@@ -1,30 +1,32 @@
+import { handleStart } from "./gameManager.js";
+
 document.addEventListener('DOMContentLoaded', () => {
-    // Check for required session data
     const playerName = sessionStorage.getItem('playerName');
-    // const gridSize = sessionStorage.getItem('gridSize');
-    // const roomSize = sessionStorage.getItem('roomSize');
+    const start = document.getElementById("new-game")
+    const copyLinkBtn = document.getElementById("copy-join-link")
+
+
+    start.addEventListener('click',() =>{
+        handleStart()
+    })
+    copyLinkBtn.addEventListener('click',()=>{
+        copyJoinLink()
+    })    
 
     if (!playerName) {
         window.location.href = '../start-room/start-room.html';
         return;
     }
 
-    // // Update page content with session data
-    // document.querySelector('h1').textContent = `${playerName}'s Room`;
-    // document.getElementById('room-details').innerHTML = `
-    //     Grid Size: ${gridSize}x${gridSize}<br>
-    //     Max Players: ${roomSize}<br>
-    //     Game Mode: ${sessionStorage.getItem('gameMode') || 'Co-op'}
-    // `;
-
 });
 
 function copyJoinLink() {
     const roomCode = document.getElementById('host-id').textContent;
     // prod
-    const joinURL = `${window.location.origin}/MinesweeperS/frontend/multiplayer-client/join-room/join-room.html?room=${roomCode}`;
+    //const joinURL = `${window.location.origin}/MinesweeperS/frontend/multiplayer-client/join-room/join-room.html?room=${roomCode}`;
+
     //local
-    //const joinURL = `${window.location.origin}/frontend/multiplayer-client/join-room/join-room.html?room=${roomCode}`;
+    const joinURL = `${window.location.origin}/frontend/multiplayer-client/join-room/join-room.html?room=${roomCode}`;
 
     navigator.clipboard.writeText(joinURL)
         .then(() => {
@@ -38,4 +40,5 @@ function copyJoinLink() {
             console.error('Failed to copy:', err);
         });
 }
+
 

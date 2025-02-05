@@ -312,6 +312,7 @@ export function minesweeper(width,length, gameBombCount){
         flaggedTiles,
         gridWidth,
         gridLength,
+        bombCount,
         flagMode,
         revealTile,
         flagTile,

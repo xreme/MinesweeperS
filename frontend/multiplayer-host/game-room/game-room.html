@@ -1,8 +1,10 @@
 <!DOCTYPE html>
 <head>
     <script src="https://unpkg.com/peerjs@1.5.4/dist/peerjs.min.js"></script>
-    <script src="game-room.js"></script>
-    <script src="host-server.js"></script>
+    <script type="module" src="game-room.js"></script>
+    <script  type="module" src="host-server.js"></script>
+    <script type="module" src="gameManager.js"></script>
+    <script type="module" src="gameboard.js"></script>
     <link href="gameboard-styles.css" rel="stylesheet">
     <link href="game-room.css" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -14,7 +16,7 @@
     <h1> Game Room</h1>
     <p>ROOM ID: <span id="host-id"></span></p>
 
-    <button id="copy-join-link" onclick="copyJoinLink()">Copy Link</button>
+    <button id="copy-join-link">Copy Link</button>
 
     <div id="room-details"></div>
     <p>Connected Clients: <span id="client-count">0</span></p>
@@ -32,20 +34,31 @@
         
     </div>
     
-    <!-- <div class="controls">
+    <div class="controls">
         <div class="input-block">
             <p>Grid Size</p>
-            <input id="grid-size" type="number" size="2" max="50" min="10" autocomplete="off">
+            <input id="grid-size" type="number"  max="50" min="10" autocomplete="off" value="10">
         </div>
         <div class="input-block">
             <p>Bomb Count</p>
-            <input id="bomb-count" type="number" size= "2" max="1000" min="10" autocomplete="off">
+            <input id="bomb-count" type="number" max="1000" min="10" autocomplete="off" value="10">
+        </div>
+        <div class="input-block">
+            <p>
+                Gamemode
+            </p>
+            <select id="modeSelection">
+                <option value="VS">
+                    VS
+                </option>
+            </select>
         </div>
         <div class="input-block">
            <p>New Game</p> 
             <button id="new-game">Start</button>
         </div>
     </div>
+    <div id="Error"></div>
     <main id="gameArea">
         <div class="game-stats">
             <span id="timer">Time: 0s</span>
@@ -58,5 +71,5 @@
         <div class="container">
             <div id="grid"></div>
         </div>
-    </main> -->
+    </main>
 </body>
