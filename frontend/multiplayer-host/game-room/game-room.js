@@ -23,10 +23,10 @@ document.addEventListener('DOMContentLoaded', () => {
 function copyJoinLink() {
     const roomCode = document.getElementById('host-id').textContent;
     // prod
-    //const joinURL = `${window.location.origin}/MinesweeperS/frontend/multiplayer-client/join-room/join-room.html?room=${roomCode}`;
+    const joinURL = `${window.location.origin}/MinesweeperS/frontend/multiplayer-client/join-room/join-room.html?room=${roomCode}`;
 
     //local
-    const joinURL = `${window.location.origin}/frontend/multiplayer-client/join-room/join-room.html?room=${roomCode}`;
+    //const joinURL = `${window.location.origin}/frontend/multiplayer-client/join-room/join-room.html?room=${roomCode}`;
 
     navigator.clipboard.writeText(joinURL)
         .then(() => {
