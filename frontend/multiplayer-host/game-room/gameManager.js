@@ -72,8 +72,8 @@ function announce(msg){
 }
 function handleWin(details){
     console.log("win")
-    announce(`${playerName} finished in ${details.time}s (${gridInput}x${gridInput}|${mineCount})`)
+    announce(`${playerName} finished in ${details.time}s`)
 }
 function handleLoss(details){
-    announce(`${playerName} lost in ${details.time}s (${gridInput}x${gridInput}|${mineCount})`)
+    announce(`${playerName} lost in ${details.time}s`)
 }
