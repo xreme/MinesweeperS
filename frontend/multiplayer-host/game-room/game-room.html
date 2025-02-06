@@ -12,8 +12,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Sixtyfour+Convergence&display=swap" rel="stylesheet">
 </head>
 <body>
-    <a href="../../landing.html">HOME</a>
     <h1> Game Room</h1>
+    <a href="../../landing.html">HOME</a>
     <p>ROOM ID: <span id="host-id"></span></p>
 
     <button id="copy-join-link">Copy Link</button>
@@ -31,33 +31,26 @@
         <div id="chat-inputs">
             <input id="message-input" autocomplete="off"><button id="sendChat">SEND</button>
         </div>
+        <hr>
+        <p>Game Controls</p>
+        <div class="controls">
+            <div class="input-block">
+                <p>Grid Size</p>
+                <input id="grid-size" type="number"  max="50" min="10" autocomplete="off" value="10">
+            </div>
+            <div class="input-block">
+                <p>Bomb Count</p>
+                <input id="bomb-count" type="number" max="1000" min="10" autocomplete="off" value="10">
+            </div>
+            <div class="input-block">
+               <p>New Game</p> 
+                <button id="new-game">Start</button>
+            </div>
+        </div>
         
     </div>
     
-    <div class="controls">
-        <div class="input-block">
-            <p>Grid Size</p>
-            <input id="grid-size" type="number"  max="50" min="10" autocomplete="off" value="10">
-        </div>
-        <div class="input-block">
-            <p>Bomb Count</p>
-            <input id="bomb-count" type="number" max="1000" min="10" autocomplete="off" value="10">
-        </div>
-        <div class="input-block">
-            <p>
-                Gamemode
-            </p>
-            <select id="modeSelection">
-                <option value="VS">
-                    VS
-                </option>
-            </select>
-        </div>
-        <div class="input-block">
-           <p>New Game</p> 
-            <button id="new-game">Start</button>
-        </div>
-    </div>
+    
     <div id="Error"></div>
     <main id="gameArea">
         <div class="game-stats">
@@ -72,4 +65,14 @@
             <div id="grid"></div>
         </div>
     </main>
+    <div class="input-block" style="visibility: hidden;">
+        <p>
+            Gamemode
+        </p>
+        <select id="modeSelection">
+            <option value="VS">
+                VS
+            </option>
+        </select>
+    </div>
 </body>

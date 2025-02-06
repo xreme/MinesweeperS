@@ -45,14 +45,18 @@ function startVSGame(){
         return
     }
 
-    let mineCount =  parseInt(document.getElementById('bomb-count').value);
-    let gridInput =  parseInt(document.getElementById('grid-size').value);
+    let gridInput =  parseInt(document.getElementById('grid-size').value) || 10;
+    let mineCount =  parseInt(document.getElementById('bomb-count').value) ||  Math.floor((gridInput*gridInput) * 0.10);
     
     if(mineCount > Math.floor((gridInput*gridInput) * 0.3)){
         mineCount = Math.floor((gridInput*gridInput) * 0.3);
-        document.getElementById('bomb-count').value = mineCount
+       
     }
-
+    if(mineCount < Math.floor((gridInput*gridInput) * 0.1)){
+        mineCount = Math.floor((gridInput*gridInput) * 0.1);
+    }
+    document.getElementById('bomb-count').value = mineCount
+    document.getElementById("grid-size").value = gridInput
     var game = minesweeper(gridInput,gridInput, mineCount);
 
     announce(`New Game – ${gridInput}x${gridInput} | ${mineCount} bombs`)

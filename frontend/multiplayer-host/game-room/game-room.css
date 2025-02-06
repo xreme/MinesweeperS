@@ -3,12 +3,11 @@
     --tile-color: #272424;
     --reveal-color: #ddddddce;
 }
+
 *{
-    *{
-        color: var(--c2);
-        font-family: Sixtyfour Convergence; 
-        /* outline: 1px solid blue; */
-    }
+    color: var(--c2);
+    font-family: Sixtyfour Convergence; 
+    /* outline: 1px solid blue; */
 }
 body{
     background-color: rgb(42, 42, 42);

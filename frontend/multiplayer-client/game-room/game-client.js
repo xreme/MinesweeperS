@@ -47,7 +47,7 @@ clientPeer.on('error', (err) => {
        alert('Unable to connect to host. Please check room code.');
         setTimeout(() => {
             sessionStorage.removeItem('roomCode');
-            //window.location.href = '../join-room/join-room.html';
+            window.location.href = '../join-room/join-room.html';
         }, 3000);
     }
 });
