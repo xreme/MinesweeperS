@@ -20,7 +20,7 @@ h1, h2, h3,p{
     /* outline: 1px solid blue; */
 }
 input, button{
-    color: black;
+    color: var(--c2);
 }
 main{
     display: flex;

@@ -6,15 +6,12 @@ document.addEventListener('DOMContentLoaded', () => {
         try {
             const turnConfig = JSON.parse(localStorage.getItem('turnConfig'));
             if (turnConfig?.username && turnConfig?.password) {
-                configStatus.textContent = ' CUSTOM';
-                configStatus.style.color = '#00ff00';
+                configStatus.textContent = 'TURN';
             } else {
-                configStatus.textContent = ' DEFAULT';
-                configStatus.style.color = '#ff0000';
+                configStatus.textContent = 'STUN';
             }
         } catch (error) {
-            configStatus.textContent = ' DEFAULT';
-            configStatus.style.color = '#ff0000';
+            configStatus.textContent = 'STUN';
         }
     }
     
