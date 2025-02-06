@@ -17,6 +17,7 @@ export function startGame(newGame, winCallback, loseCallback){
     console.log(game)
     createGrid()
     startTimer()
+    scrollToBottom()
 }
 function startTimer() {
     if (timerInterval) clearInterval(timerInterval);
