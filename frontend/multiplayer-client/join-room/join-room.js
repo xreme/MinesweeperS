@@ -2,6 +2,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const joinBtn = document.getElementById("joinRoom") 
     const nameInput = document.getElementById("name")
     const roomInput = document.getElementById("roomCode")
+
+    loadSavedValues()
     
     // Check URL parameters
     const urlParams = new URLSearchParams(window.location.search);
@@ -39,4 +41,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
 function displayError(message) {
     document.getElementById('errorDsp').textContent = message;
+}
+function loadSavedValues() {
+    const playerName = sessionStorage.getItem('playerName');
+    if (playerName) {
+        document.getElementById('name').value = playerName;
+    }
 }

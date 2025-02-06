@@ -59,7 +59,7 @@ function startVSGame(){
     document.getElementById("grid-size").value = gridInput
     var game = minesweeper(gridInput,gridInput, mineCount);
 
-    announce(`New Game – ${gridInput}x${gridInput} | ${mineCount} bombs`)
+    announce(`New Game - ${gridInput}x${gridInput} | ${mineCount} bombs`)
     
     broadcast({
         header: "startGame",
@@ -81,7 +81,6 @@ function announce(msg){
     appendMessage("[SERVER]", msg)
 }
 function handleWin(details){
-    console.log("win")
     announce(`${playerName} finished in ${details.time}s`)
 }
 function handleLoss(details){

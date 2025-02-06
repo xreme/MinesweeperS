@@ -119,6 +119,9 @@ function handleGameStart(obj){
 function connectToHost() {
     if (!hostId) {
         console.error('No host ID found');
+        setTimeout(() => {
+            window.location.href = '../join-room/join-room.html';
+        }, 2000);
         return;
     }
 
