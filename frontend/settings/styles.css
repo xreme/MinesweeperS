@@ -1,7 +1,7 @@
 body{
     background-color: rgb(42, 42, 42);
 }
-h1, h2, h3{
+h1, h2, h3,p{
     font-family: Sixtyfour Convergence, Arial, Helvetica, sans-serif; 
     color: rgb(255, 104, 98);;
 }
@@ -17,9 +17,6 @@ h3 {
     font-size: clamp(1rem, 2vw, 1.5rem);
 }
 
-a{
-    text-decoration:none
-}
 main{
     display: flex;
     flex-direction: column;

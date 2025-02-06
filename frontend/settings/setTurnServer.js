@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
         };
         
         localStorage.setItem('turnConfig', JSON.stringify(turnConfig));
-        statusElement.textContent = 'TURN Credentials Stored Successfully!';
+        statusElement.textContent = 'TURN server access granted!';
         statusElement.style.color = 'green';
         
         setTimeout(() => {

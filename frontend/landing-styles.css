@@ -48,3 +48,9 @@ main{
 #reset-config:hover{
     background-color: rgba(255, 103, 98, 0.355);
 }
+#info{
+    line-height: 0;
+}
+#info a{
+    text-decoration: underline;
+}
