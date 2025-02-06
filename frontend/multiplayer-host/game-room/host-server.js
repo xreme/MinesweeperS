@@ -38,8 +38,8 @@ function getPeerConfig() {
     return null;
 }
 function generateRoomCode() {
-    //const randomDigits = Math.floor(1000 + Math.random() * 9000);
-    const randomDigits = 1000
+    const randomDigits = Math.floor(1000 + Math.random() * 9000);
+    //const randomDigits = 1000
     return `${randomDigits}`;
 }
 
