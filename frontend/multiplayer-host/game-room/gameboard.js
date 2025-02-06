@@ -10,11 +10,9 @@ var handleLoss = null
 var handleWin = null
 
 export function startGame(newGame, winCallback, loseCallback){
-    console.log("Initializing game")
     game = newGame
     handleLoss = loseCallback
     handleWin = winCallback
-    console.log(game)
     createGrid()
     startTimer()
     scrollToBottom()

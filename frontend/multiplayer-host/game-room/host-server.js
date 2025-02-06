@@ -110,7 +110,7 @@ function handleChat(peerID, message){
     }
 }
 function handleGameResult(peerId, data){
-    console.log(data)
+    //console.log(data)
     let msg = ''
     if(data.result == 'win'){
         let playerInfo = clientInfo.get(peerId)
@@ -154,7 +154,7 @@ function sendDetails(connection, details) {
             body: details
         };
         const obj = JSON.stringify(data);
-        console.log('Sending details:', obj);
+        //console.log('Sending details:', obj);
         connection.send(obj);
     } catch (error) {
         console.error('Error sending details:', error);

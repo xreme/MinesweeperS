@@ -7,13 +7,6 @@ import { sendData } from "./game-client.js";
 //     startGame(game, null, null)
 // })
 export function startVSGame(gameInfo){
-    console.log("starting game...")
-    console.log(gameInfo)
-
-    const b = gameInfo.grid.length * 2;
-    const kb = (b / 1024).toFixed(2);
-    console.log(`${kb}KB`);
-
     var game = minesweeper(gameInfo.gridWidth,
         gameInfo.gridLength,
         gameInfo.bombCount,

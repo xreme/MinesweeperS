@@ -263,7 +263,7 @@ window.addEventListener('keyup', (e) => {    if (e.key === 'Shift' && game.getFl
 function updateWins(){
     let winCount = localStorage.getItem("winCount");
     let winCountDisplay = document.getElementById('wins');
-    console.log(winCount)
+    //console.log(winCount)
     if(winCount){
         winCountDisplay.textContent = 'Wins: ' + winCount;
     }

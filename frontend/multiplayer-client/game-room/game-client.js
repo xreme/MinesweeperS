@@ -31,9 +31,7 @@ function getPeerConfig() {
 }
 
 const config = getPeerConfig() || null
-console.log(config)
 const clientPeer = config ? new Peer(config): new Peer()
-console.log(clientPeer)
 
 //const clientPeer = new Peer();
 let activeConnection;
@@ -56,9 +54,6 @@ clientPeer.on('open', (id) => {
     console.log(`Client ready. ID: ${id}`);
     connectToHost();
 });
-clientPeer.on('icecandidate', (candidate) => {
-    console.log('ICE Candidate:', candidate);
-});
 clientPeer.on('error', (err) => {
     console.error('Peer error:', err);
 });
@@ -78,7 +73,7 @@ export function sendData(obj){
     activeConnection.send(data)
 }
 function handleData(data){
-    console.log("data:", data)
+    //console.log("data:", data)
     try{
         var obj = JSON.parse(data)
     }
@@ -102,7 +97,7 @@ function handleData(data){
     }
 }
 function displayHostInfo(){
-    console.log("got host info", hostInfo)
+    //console.log("host info", hostInfo)
     let roomLbl = document.getElementById("roomDisplay");
     let hostName = hostInfo.body.name
 
@@ -113,8 +108,6 @@ function handleChat(data){
     appendMessage(data.from, data.messageContent)
 }
 function handleGameStart(obj){
-    console.log(obj)
-
     switch(obj.gamemode){
         case "VS":
             startVSGame(obj.gameInstance);
