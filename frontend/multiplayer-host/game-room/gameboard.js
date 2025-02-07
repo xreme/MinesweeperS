@@ -94,9 +94,7 @@ function handleClick(e) {
             lose()
             return;
         } else if(result === 'winner') {
-            showFullBoard();
-            alert('You Win!');
-            addWin();
+            win()
             return
         }
     }
