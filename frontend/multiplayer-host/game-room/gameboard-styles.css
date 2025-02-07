@@ -52,8 +52,8 @@ a:hover{
     background-color: var(--c2);
 }
 .container {
-    max-width: 70vw;
-    max-height: 70vw;
+    max-width: 900vw;
+    max-height: 90vw;
     overflow: auto;
 }
 .flagControls{
@@ -87,11 +87,8 @@ a:hover{
     margin: 20px auto;
     width: fit-content;
     margin: 2px;
-    outline: 1px solid rgb(143, 107, 107);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.8);
     border-radius: 4px;
-    padding: 1px;
-
 }
 #new-game, #toggle-flag{
     background-color:rgba(0, 0, 0, 0);

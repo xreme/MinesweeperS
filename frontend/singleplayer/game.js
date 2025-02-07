@@ -105,29 +105,27 @@ function calculateGridSize() {
     const vw = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0);
     const vh = Math.max(document.documentElement.clientHeight || 0, window.innerHeight || 0);
 
-    // Calculate available space (accounting for UI elements)
-    const headerHeight = 100; // Adjust based on your header
-    const uiPadding = 40;
-    const availableWidth = vw - uiPadding;
-    const availableHeight = vh - headerHeight - uiPadding;
-
+    const availableWidth = vw
+    const availableHeight = vh
+    console.log(vh,vw)
     // Determine optimal container size
     const maxContainerSize = Math.min(
         availableWidth,
         availableHeight,
         1000 // Maximum allowed size
     );
-
+    console.log(maxContainerSize)
     // Calculate tile size based on grid density
     const gridDensity = Math.max(gameDimensions[0], gameDimensions[1]);
-    const minTileSize = 30; // Minimum tile size
+    const minTileSize = 20; 
+    console.log(Math.floor((maxContainerSize * 0.9) / gridDensity) )
     const optimalTileSize = Math.max(
         minTileSize,
-        Math.floor((maxContainerSize * 0.9) / gridDensity)
+        Math.floor((maxContainerSize * 0.85) / gridDensity)
     );
 
     return {
-        tileSize: optimalTileSize,
+        tileSize: optimalTileSize-5,
         containerSize: optimalTileSize * gridDensity
     };
 }
