@@ -1,3 +1,4 @@
+import { handleCoopAction } from "./game-manager.js";
 import { startVSGame, startCoopGame } from "./game-manager.js";
 const playerName = sessionStorage.getItem('playerName') || 'Unknown'
 const iceConfig = {
@@ -91,6 +92,9 @@ function handleData(data){
             break;
         case 'startGame':
             handleGameStart(obj.body)
+            break;
+        case 'CoopAction':
+            handleCoopAction(data)
             break;
         default:
             console.log("Uknown Header:", data)

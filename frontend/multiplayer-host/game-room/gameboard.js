@@ -113,10 +113,11 @@ function handleClick(e) {
     }
 }
 export function clickTile(inRow, inCol, flag){
-    console.log(inRow,inCol,flag)
 
     let row = parseInt(inRow)
     let col = parseInt(inCol)
+
+    flag === game.getFlagMode() ? null : game.toggleFlag()
 
     if(game.getFlagMode()) {
         game.clickTile([row, col]);

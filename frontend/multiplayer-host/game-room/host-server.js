@@ -1,3 +1,4 @@
+import { handleCoopAction } from "./gameManager.js";
 const iceConfig = {
     config: {
         iceServers: [
@@ -38,8 +39,8 @@ function getPeerConfig() {
     return null;
 }
 function generateRoomCode() {
-    //const randomDigits = Math.floor(1000 + Math.random() * 9000);
-    const randomDigits = 1000
+    const randomDigits = Math.floor(1000 + Math.random() * 9000);
+    //const randomDigits = 1000
     return `${randomDigits}`;
 }
 
@@ -177,6 +178,9 @@ function handleData(connection,data){
             break;
         case 'gameResult':
             handleGameResult(connection.peer, obj.body)
+            break;
+        case 'CoopAction':
+            handleCoopAction({name:clientInfo.get(connection.peer).name, data:obj.body})
             break;
         default:
             connection.send("Unknown Command")

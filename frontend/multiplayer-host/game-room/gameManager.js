@@ -1,6 +1,7 @@
 import { broadcast, appendMessage } from "./host-server.js";
 import { startGame, clickTile } from "./gameboard.js";
 import { minesweeper } from "../../../cicada.js"
+import { setGamemodeLbl } from "./game-room.js";
 
 const playerName = sessionStorage.getItem('playerName');
 
@@ -69,6 +70,7 @@ function startVSGame(){
             gameInstance: game
         }
     })
+    setGamemodeLbl("VS Mode")
     startGame(game, (data)=>handleWin(data), (data)=>handleLoss(data))
 }
 function startCoopGame(){
@@ -98,7 +100,7 @@ function startCoopGame(){
             gameInstance: game
         }
     })
-
+    setGamemodeLbl("CO-OP")
     startGame(game, (data)=>handleWin(data), (data=>handleLoss(data)),'CO-OP',(data)=>coopTileClick(data))
 }
 
@@ -120,7 +122,21 @@ function handleLoss(details){
     announce(`${playerName} lost in ${details.time}s`)
 }
 
-function coopTileClick(data){
+export function handleCoopAction(data){
+ // implemenet quee, and flagging
+    console.log(data)
+    coopTileClick(data.data.data)
+}
+
+export function coopTileClick(data){
     console.log(data)
     clickTile(data.row, data.col, data.flagMode)
+
+    broadcast({
+        header: "CoopAction",
+        body:{
+            action:'click',
+            data
+        }
+    })
 }

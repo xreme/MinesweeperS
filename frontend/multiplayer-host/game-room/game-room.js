@@ -1,9 +1,10 @@
 import { handleStart } from "./gameManager.js";
-
+let  gamemodeLbl = null
 document.addEventListener('DOMContentLoaded', () => {
     const playerName = sessionStorage.getItem('playerName');
     const start = document.getElementById("new-game")
     const copyLinkBtn = document.getElementById("copy-join-link")
+    gamemodeLbl = document.getElementById("gamemode")
 
 
     start.addEventListener('click',() =>{
@@ -18,6 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
         return;
     }
 
+   
 });
 
 function copyJoinLink() {
@@ -39,6 +41,10 @@ function copyJoinLink() {
         .catch(err => {
             console.error('Failed to copy:', err);
         });
+}
+
+export function setGamemodeLbl(text){
+    gamemodeLbl.textContent = text
 }
 
 
