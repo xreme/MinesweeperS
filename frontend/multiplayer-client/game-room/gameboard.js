@@ -131,6 +131,8 @@ export function clickTile(inRow,inCol, flag){
             return
         }
     }
+    game.getFlagMode() ? game.toggleFlag() : null
+    statusDisplay.style.backgroundColor = (game.getFlagMode() ? 'rgba(255, 103, 98, 0.11)' : 'rgba(255, 103, 98, 0)')
     updateBoard();
 }
 function lose(){
