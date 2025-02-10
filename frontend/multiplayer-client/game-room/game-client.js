@@ -1,4 +1,4 @@
-import { startVSGame } from "./game-manager.js";
+import { startVSGame, startCoopGame } from "./game-manager.js";
 const playerName = sessionStorage.getItem('playerName') || 'Unknown'
 const iceConfig = {
     config: {
@@ -46,7 +46,7 @@ clientPeer.on('error', (err) => {
         setTimeout(() => {
             sessionStorage.removeItem('roomCode');
             window.location.href = '../join-room/join-room.html';
-        }, 3000);
+        }, 500);
     }
 });
 
@@ -111,6 +111,9 @@ function handleGameStart(obj){
     switch(obj.gamemode){
         case "VS":
             startVSGame(obj.gameInstance);
+            break;
+        case 'CO-OP':
+            startCoopGame(obj.gameInstance);
             break;
         default:
             console.log("unknown mode")

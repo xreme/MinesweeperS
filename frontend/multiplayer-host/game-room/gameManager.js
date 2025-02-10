@@ -1,5 +1,5 @@
 import { broadcast, appendMessage } from "./host-server.js";
-import { startGame } from "./gameboard.js";
+import { startGame, clickTile } from "./gameboard.js";
 import { minesweeper } from "../../../cicada.js"
 
 const playerName = sessionStorage.getItem('playerName');
@@ -8,7 +8,10 @@ export function handleStart(){
     var choice = document.getElementById("modeSelection").value
     switch(choice){
         case 'VS':
-            startVSGame()
+            startVSGame();
+            break;
+        case 'CO-OP':
+            startCoopGame();
             break;
         default:
             return;
@@ -44,7 +47,6 @@ function startVSGame(){
     if(!checkValues()){
         return
     }
-
     let gridInput =  parseInt(document.getElementById('grid-size').value) || 10;
     let mineCount =  parseInt(document.getElementById('bomb-count').value) ||  Math.floor((gridInput*gridInput) * 0.10);
     
@@ -59,8 +61,7 @@ function startVSGame(){
     document.getElementById("grid-size").value = gridInput
     var game = minesweeper(gridInput,gridInput, mineCount);
 
-    announce(`New Game - ${gridInput}x${gridInput} | ${mineCount} bombs`)
-    
+    announce(`VS - ${gridInput}x${gridInput} | ${mineCount} bombs`)
     broadcast({
         header: "startGame",
         body:{
@@ -70,6 +71,38 @@ function startVSGame(){
     })
     startGame(game, (data)=>handleWin(data), (data)=>handleLoss(data))
 }
+function startCoopGame(){
+     // read parameters
+     if(!checkValues()){
+        return
+    }
+    let gridInput =  parseInt(document.getElementById('grid-size').value) || 10;
+    let mineCount =  parseInt(document.getElementById('bomb-count').value) ||  Math.floor((gridInput*gridInput) * 0.10);
+    
+    if(mineCount > Math.floor((gridInput*gridInput) * 0.3)){
+        mineCount = Math.floor((gridInput*gridInput) * 0.3);
+       
+    }
+    if(mineCount < Math.floor((gridInput*gridInput) * 0.1)){
+        mineCount = Math.floor((gridInput*gridInput) * 0.1);
+    }
+    document.getElementById('bomb-count').value = mineCount
+    document.getElementById("grid-size").value = gridInput
+    var game = minesweeper(gridInput,gridInput, mineCount);
+
+    announce(`Co-op - ${gridInput}x${gridInput} | ${mineCount} bombs`)
+    broadcast({
+        header: "startGame",
+        body:{
+            gamemode: "CO-OP",
+            gameInstance: game
+        }
+    })
+
+    startGame(game, (data)=>handleWin(data), (data=>handleLoss(data)),'CO-OP',(data)=>coopTileClick(data))
+}
+
+
 function announce(msg){
     broadcast({
         header:"chatMessage",
@@ -85,4 +118,9 @@ function handleWin(details){
 }
 function handleLoss(details){
     announce(`${playerName} lost in ${details.time}s`)
+}
+
+function coopTileClick(data){
+    console.log(data)
+    clickTile(data.row, data.col, data.flagMode)
 }

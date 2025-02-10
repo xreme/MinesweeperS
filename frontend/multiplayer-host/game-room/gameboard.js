@@ -2,6 +2,8 @@ var game = null;;
 var flagsPlaced;
 var remainingBombs;
 var allowPlay = true;
+var gamemode = null;
+var handleTileClick = null
 let startTime;
 let timerInterval;
 let statusDisplay = document.getElementById('toggle-flag');
@@ -9,10 +11,12 @@ let statusDisplay = document.getElementById('toggle-flag');
 var handleLoss = null
 var handleWin = null
 
-export function startGame(newGame, winCallback, loseCallback){
+export function startGame(newGame, winCallback, loseCallback, inGamemode, handleClick){
     game = newGame
     handleLoss = loseCallback
     handleWin = winCallback
+    gamemode = inGamemode 
+    handleTileClick = handleClick
     createGrid()
     startTimer()
     scrollToBottom()
@@ -85,7 +89,35 @@ function calculateGridSize() {
 function handleClick(e) {
     const row = parseInt(e.target.dataset.row);
     const col = parseInt(e.target.dataset.col);
-    
+
+    if (handleTileClick){
+        handleTileClick({
+            row:row,
+            col: col,
+            flagMode: game.getFlagMode()
+        })
+    }else{
+        if(game.getFlagMode()) {
+            game.clickTile([row, col]);
+        } else {
+            const result = game.clickTile([row, col]);
+            if(result === 'x') {
+                lose()
+                return;
+            } else if(result === 'winner') {
+                win()
+                return
+            }
+        }
+        updateBoard();
+    }
+}
+export function clickTile(inRow, inCol, flag){
+    console.log(inRow,inCol,flag)
+
+    let row = parseInt(inRow)
+    let col = parseInt(inCol)
+
     if(game.getFlagMode()) {
         game.clickTile([row, col]);
     } else {
