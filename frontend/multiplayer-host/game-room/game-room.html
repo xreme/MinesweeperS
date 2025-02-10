@@ -43,6 +43,17 @@
                 <input id="bomb-count" type="number" max="1000" min="10" autocomplete="off" value="10">
             </div>
             <div class="input-block">
+                <p>
+                    Gamemode
+                </p>
+                <select id="modeSelection">
+                    <option value="VS">
+                        VS
+                    </option>
+                    <option value="CO-OP">CO-OP</option>
+                </select>
+            </div>
+            <div class="input-block">
                <p>New Game</p> 
                 <button id="new-game">Start</button>
             </div>
@@ -65,14 +76,4 @@
             <div id="grid"></div>
         </div>
     </main>
-    <div class="input-block" style="visibility: hidden;">
-        <p>
-            Gamemode
-        </p>
-        <select id="modeSelection">
-            <option value="VS">
-                VS
-            </option>
-        </select>
-    </div>
 </body>
