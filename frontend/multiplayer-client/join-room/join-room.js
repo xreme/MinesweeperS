@@ -12,9 +12,17 @@ document.addEventListener('DOMContentLoaded', () => {
         roomInput.value = roomCode;
     }
 
-    joinBtn.addEventListener('click', (e) => {
-        e.preventDefault();
-        
+    function loadSavedValues() {
+        const playerName = sessionStorage.getItem('playerName');
+        if (playerName) {
+            document.getElementById('name').value = playerName;
+        }
+    }
+
+    function displayError(message) {
+        document.getElementById('errorDsp').textContent = message;
+    }
+    function joinGame(){
         var playerName = nameInput.value.trim();
         var roomCode = roomInput.value.trim();
         
@@ -36,15 +44,16 @@ document.addEventListener('DOMContentLoaded', () => {
         
         // Navigate to game room
         window.location.href = '../game-room/game-room.html';
+    }
+
+    joinBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        joinGame();
     });
+
+    document.addEventListener('keyup',(e)=>{
+        e.key === 'Enter' ? joinGame() : null;
+        
+    })
 });
 
-function displayError(message) {
-    document.getElementById('errorDsp').textContent = message;
-}
-function loadSavedValues() {
-    const playerName = sessionStorage.getItem('playerName');
-    if (playerName) {
-        document.getElementById('name').value = playerName;
-    }
-}
