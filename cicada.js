@@ -322,7 +322,8 @@ export function minesweeper(width,length, gameBombCount, inputGrid = null ){
         getTile,
         getFlagMode,
         toggleFlag,
-        clickTile
+        clickTile,
+        handleFlag 
     }
     // don't think should leave flag and remove flag exposed to user
 }

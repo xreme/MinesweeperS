@@ -117,10 +117,8 @@ export function clickTile(inRow,inCol, flag){
     let row = parseInt(inRow)
     let col = parseInt(inCol)
 
-    flag === game.getFlagMode() ? null : game.toggleFlag()
-
-    if(game.getFlagMode()) {
-        game.clickTile([row, col]);
+    if(flag) {
+        game.handleFlag([row,col])
     } else {
         const result = game.clickTile([row, col]);
         if(result === 'x') {
@@ -131,7 +129,6 @@ export function clickTile(inRow,inCol, flag){
             return
         }
     }
-    game.getFlagMode() ? game.toggleFlag() : null
     statusDisplay.style.backgroundColor = (game.getFlagMode() ? 'rgba(255, 103, 98, 0.11)' : 'rgba(255, 103, 98, 0)')
     updateBoard();
 }
