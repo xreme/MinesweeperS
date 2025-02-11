@@ -155,6 +155,7 @@ export function minesweeper(width,length, gameBombCount, inputGrid = null ){
             flaggedTiles.push(coords)
             //console.log("Added flag at", coords)
         }
+        return
     }
     function flagTile(coords){
         // Check if coordinate is valid

@@ -131,7 +131,6 @@ export function handleCoopAction(data){
 export function coopTileClick(data){
     console.log(data)
     clickTile(data.row, data.col, data.flagMode)
-
     broadcast({
         header: "CoopAction",
         body:{
