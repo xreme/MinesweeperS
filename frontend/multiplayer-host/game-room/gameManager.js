@@ -4,6 +4,7 @@ import { minesweeper } from "../../../cicada.js"
 import { setGamemodeLbl } from "./game-room.js";
 
 const playerName = sessionStorage.getItem('playerName');
+const actionQueue = []
 
 export function handleStart(){
     var choice = document.getElementById("modeSelection").value
@@ -123,19 +124,34 @@ function handleLoss(details){
 }
 
 export function handleCoopAction(data){
- // implemenet quee, and flagging
     console.log(data)
     coopTileClick(data.data.data)
 }
-
+export function processActionQueue(){
+   console.log("action queue", actionQueue)
+    while (actionQueue.length > 0){
+        let action = actionQueue[0];
+        try{
+            clickTile(action.data.row, action.data.col, action.data.flagMode);
+            actionQueue.shift();
+        }
+        catch(error){
+            console.log("Failed to process action:", error);
+            actionQueue.shift();
+        }
+   }
+}
 export function coopTileClick(data){
-    console.log(data)
-    clickTile(data.row, data.col, data.flagMode)
+    //clickTile(data.row, data.col, data.flagMode)
+    let actionObj = {
+        action: 'click',
+        data: data
+    }
+    actionQueue.push(actionObj)
+    console.log("action queue", actionQueue)
     broadcast({
         header: "CoopAction",
-        body:{
-            action:'click',
-            data
-        }
+        body:actionObj
     })
+    processActionQueue()
 }

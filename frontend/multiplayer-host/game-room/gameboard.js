@@ -4,6 +4,7 @@ var remainingBombs;
 var allowPlay = true;
 var gamemode = null;
 var handleTileClick = null
+var toggleFlag = false;
 let startTime;
 let timerInterval;
 let statusDisplay = document.getElementById('toggle-flag');
@@ -94,9 +95,10 @@ function handleClick(e) {
         handleTileClick({
             row:row,
             col: col,
-            flagMode: game.getFlagMode()
+            flagMode: toggleFlag
         })
-    }else{
+    }
+    else{
         if(game.getFlagMode()) {
             game.clickTile([row, col]);
         } else {
@@ -113,18 +115,18 @@ function handleClick(e) {
     }
 }
 export function clickTile(inRow, inCol, flag){
+    console.log(flag, toggleFlag)
     let row = parseInt(inRow)
     let col = parseInt(inCol)
-    let flagState = game.getFlagMode()
 
-    if (flag === flagState ? null : game.toggleFlag())
-        console.log(flag, flagState)
     if(flag) {
-        game.clickTile([row, col]);
-        if (game.getFlagMode() === flagState ? null : game.toggleFlag()) 
-        console.log('flag it')
+        // game.toggleFlag()
+        // game.clickTile([row, col]); 
+        // game.toggleFlag()
+        game.handleFlag([row,col])
     } else {
         console.log('clicking tile...')
+        game.disableFlag()
         const result = game.clickTile([row, col]);
         if(result === 'x') {
             lose()
@@ -133,9 +135,7 @@ export function clickTile(inRow, inCol, flag){
             win()
             return
         }
-    }
-    if (game.getFlagMode() === flagState ? null : toggleFlag()) 
-    statusDisplay.style.backgroundColor = (game.getFlagMode() ? 'rgba(255, 103, 98, 0.11)' : 'rgba(255, 103, 98, 0)')
+    } 
     updateBoard();
 }
 function lose(){
@@ -218,19 +218,37 @@ function scrollToTop() {
     });
 }
 
-
 document.getElementById('toggle-flag').addEventListener('click', () => {
-    game.toggleFlag();
-    statusDisplay.style.backgroundColor= (game.getFlagMode() ? 'rgba(255, 103, 98, 0.11)' : 'rgba(255, 103, 98, 0)')
-});
-window.addEventListener('keydown', (e) => {
-    if (e.key === 'Shift' && !game.getFlagMode()) {
+    if (gamemode == "CO-OP"){
+        toggleFlag =!(toggleFlag)
+        statusDisplay.style.backgroundColor = (toggleFlag ? 'rgba(255, 103, 98, 0.11)' : 'rgba(255, 103, 98, 0)')
+    }
+    else{
         game.toggleFlag();
-        statusDisplay.style.backgroundColor = 'rgba(255, 103, 98, 0.11)'
+        statusDisplay.style.backgroundColor= (game.getFlagMode() ? 'rgba(255, 103, 98, 0.11)' : 'rgba(255, 103, 98, 0)')
     }
 });
-window.addEventListener('keyup', (e) => {    if (e.key === 'Shift' && game.getFlagMode()) {
-        game.toggleFlag();
-        statusDisplay.style.backgroundColor = 'rgba(255, 103, 98, 0)'
+window.addEventListener('keydown', (e) => {
+    if (e.key === 'Shift') {
+        if( gamemode == "CO-OP" && !toggleFlag){
+            toggleFlag =!(toggleFlag)
+            statusDisplay.style.backgroundColor = (toggleFlag ? 'rgba(255, 103, 98, 0.11)' : 'rgba(255, 103, 98, 0)') 
+        }
+        else if(!game.getFlagMode()){
+            game.toggleFlag();
+            statusDisplay.style.backgroundColor = 'rgba(255, 103, 98, 0.11)'
+        }
+    }
+});
+window.addEventListener('keyup', (e) => {    
+    if (e.key === 'Shift') {
+        if (gamemode == "CO-OP" && toggleFlag){
+            toggleFlag = !(toggleFlag)
+            statusDisplay.style.backgroundColor = 'rgba(255, 103, 98, 0)' 
+        }
+        else if (game.getFlagMode()){
+            game.toggleFlag();
+            statusDisplay.style.backgroundColor = 'rgba(255, 103, 98, 0)'
+       } 
     }
 });
