@@ -155,6 +155,7 @@ export function minesweeper(width,length, gameBombCount, inputGrid = null ){
             flaggedTiles.push(coords)
             //console.log("Added flag at", coords)
         }
+        return
     }
     function flagTile(coords){
         // Check if coordinate is valid
@@ -222,14 +223,13 @@ export function minesweeper(width,length, gameBombCount, inputGrid = null ){
         }
     }
     function toggleFlag(){
-        if (flagMode){
-            //console.log("flag mode off")
-            flagMode = false
-        }
-        else{
-            //console.log("flag mode on")
-            flagMode = true ;
-        }
+        flagMode = !flagMode
+    }
+    function enableFlag(){
+        flagMode = true
+    }
+    function disableFlag(){
+        flagMode = false
     }
     function checkWin(){
         let area = gridWidth * gridLength;
@@ -322,7 +322,10 @@ export function minesweeper(width,length, gameBombCount, inputGrid = null ){
         getTile,
         getFlagMode,
         toggleFlag,
-        clickTile
+        clickTile,
+        handleFlag ,
+        enableFlag,
+        disableFlag
     }
     // don't think should leave flag and remove flag exposed to user
 }
