@@ -1,37 +1,39 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>MinesweeperS</title>
-        <link rel="stylesheet" href="start-room.css">
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <script src="start-room.js"></script>
-        <link href="https://fonts.googleapis.com/css2?family=Sixtyfour+Convergence&display=swap" rel="stylesheet">
 
-    </head>
-    <body>
-        <header>
-            <h1 >
-                MinesweeperS
-            </h1>
-            <nav>
-                <a href="../../landing.html">HOME</a>
-            </nav>
-        </header>
-        <main>
-            <!-- save this info in local storage for future access -->
-            <div id="selection-items">
-                <div>
-                    <h2>
-                        Room Settings
-                    </h2>
-                    <h3>
-                        NAME
-                    </h3>
-                    <input size="15" min="10" autocomplete="off" id="player-name">
-                </div>
-                <div>
-                    <!-- <h2>Game Settings</h2>
+<head>
+    <title>MinesweeperS</title>
+    <link rel="stylesheet" href="start-room.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <script src="start-room.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Sixtyfour+Convergence&display=swap" rel="stylesheet">
+
+</head>
+
+<body>
+    <header>
+        <h1>
+            MinesweeperS
+        </h1>
+        <nav>
+            <a href="../../landing.html">HOME</a>
+        </nav>
+    </header>
+    <main>
+        <!-- save this info in local storage for future access -->
+        <div id="selection-items">
+            <div>
+                <h2>
+                    Room Settings
+                </h2>
+                <h3>
+                    PLAYER NAME
+                </h3>
+                <input size="15" min="10" autocomplete="off" id="player-name">
+            </div>
+            <div>
+                <!-- <h2>Game Settings</h2>
                     <div>
                         <h3>
                             Grid Size
@@ -54,12 +56,13 @@
                         </h3>
                         <input id="room-size" type="number" size="1" max="5" min="2" autocomplete="off">
                     </div> -->
-                    <button>START ROOM</button>
-                </div>
+                <button>START ROOM</button>
             </div>
+        </div>
 
-            <p id="errorDisplay"></p>
-            <!-- Lobby Information -->
-        </main>
-    </body>
+        <p id="errorDisplay"></p>
+        <!-- Lobby Information -->
+    </main>
+</body>
+
 </html>

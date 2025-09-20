@@ -1,8 +1,9 @@
 <!DOCTYPE html>
+
 <head>
     <script src="https://unpkg.com/peerjs@1.5.4/dist/peerjs.min.js"></script>
     <script type="module" src="game-room.js"></script>
-    <script  type="module" src="host-server.js"></script>
+    <script type="module" src="host-server.js"></script>
     <script type="module" src="game-manager.js"></script>
     <script type="module" src="gameboard.js"></script>
     <link href="gameboard-styles.css" rel="stylesheet">
@@ -11,6 +12,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Sixtyfour+Convergence&display=swap" rel="stylesheet">
 </head>
+
 <body>
     <h1> Game Room</h1>
     <a href="../../landing.html">HOME</a>
@@ -36,7 +38,7 @@
         <div class="controls">
             <div class="input-block">
                 <p>Grid Size</p>
-                <input id="grid-size" type="number"  max="50" min="10" autocomplete="off" value="10">
+                <input id="grid-size" type="number" max="50" min="10" autocomplete="off" value="10">
             </div>
             <div class="input-block">
                 <p>Bomb Count</p>
@@ -47,21 +49,21 @@
                     Gamemode
                 </p>
                 <select id="modeSelection">
+                    <option value="CO-OP">CO-OP</option>
                     <option value="VS">
                         VS
                     </option>
-                    <option value="CO-OP">CO-OP</option>
                 </select>
             </div>
             <div class="input-block">
-               <p>New Game</p> 
+                <p>New Game</p>
                 <button id="new-game">Start</button>
             </div>
         </div>
-        
+
     </div>
-    
-    
+
+
     <div id="Error"></div>
     <main id="gameArea">
         <p id="gamemode"></p>
