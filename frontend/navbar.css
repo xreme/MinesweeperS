@@ -1,0 +1,39 @@
+.classic-navbar {
+    background-color: #c0c0c0;
+    border-top: 2px solid #ffffff;
+    border-left: 2px solid #ffffff;
+    border-right: 2px solid #808080;
+    border-bottom: 2px solid #808080;
+    display: flex;
+    padding: 2px 10px;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    box-sizing: border-box;
+}
+
+.classic-navbar a,
+.classic-navbar a:visited {
+    color: #000000 !important;
+    text-decoration: none;
+    padding: 4px 12px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 0.9rem;
+    display: block;
+}
+
+.classic-navbar a:hover {
+    background-color: #000080;
+    color: #ffffff;
+}
+
+.classic-navbar a::first-letter {
+    text-decoration: underline;
+}
+
+/* Adjust body padding to account for fixed navbar */
+body {
+    padding-top: 40px !important;
+}

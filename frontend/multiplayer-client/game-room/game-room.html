@@ -6,15 +6,19 @@
     <script type="module" src="game-manager.js"></script>
     <script type="module" src="game-room.js"></script>
     <script type="module" src="gameboard.js"></script>
+    <link rel="stylesheet" href="../../navbar.css">
     <link rel="stylesheet" href="game-room.css">
     <link rel="stylesheet" href="gameboard-styles.css">
 
 </head>
 
 <body>
+    <nav class="classic-navbar">
+        <a href="../../landing.html"><u>H</u>ome</a>
+        <a href="../../help.html"><u>H</u>elp</a>
+    </nav>
     <header>
         <h1 id="roomDisplay">CONNECTING...</h1>
-        <a href="../../landing.html">HOME</a>
     </header>
 
     <div id="chat">
@@ -26,16 +30,16 @@
     </div>
 
     <main id="gameArea">
-        <p id="gamemode"></p>
-        <div class="game-stats">
-            <span id="timer">000</span>
-            <span id="bomb-counter">000</span>
-            <span id="flag-counter">000</span>
-        </div>
-        <div class="flagControls">
-            <button id="toggle-flag">FLAG (SHFT)</button>
-        </div>
         <div class="container">
+            <p id="gamemode"></p>
+            <div class="game-stats">
+                <span id="timer">000</span>
+                <span id="bomb-counter">000</span>
+                <span id="flag-counter">000</span>
+            </div>
+            <div class="flagControls">
+                <button id="toggle-flag">FLAG (SHFT)</button>
+            </div>
             <div id="grid"></div>
         </div>
     </main>

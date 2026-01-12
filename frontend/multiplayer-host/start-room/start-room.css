@@ -37,16 +37,6 @@ h1 {
     color: white;
 }
 
-nav a {
-    color: #7398f4;
-    text-decoration: none;
-    font-family: 'Courier New', Courier, monospace;
-    font-weight: bold;
-}
-
-nav a:hover {
-    text-decoration: underline;
-}
 
 main {
     display: flex;

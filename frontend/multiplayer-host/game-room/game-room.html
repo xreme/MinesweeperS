@@ -7,14 +7,17 @@
     <script type="module" src="game-manager.js"></script>
     <script type="module" src="gameboard.js"></script>
     <link href="gameboard-styles.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../navbar.css">
     <link href="game-room.css" rel="stylesheet">
 </head>
 
 <body>
-    <h1>Game Room</h1>
+    <nav class="classic-navbar">
+        <a href="../../landing.html"><u>H</u>ome</a>
+        <a href="../../help.html"><u>H</u>elp</a>
+    </nav>
     <header>
-        <a href="../../landing.html">HOME</a>
-        <p>ROOM ID: <span id="host-id"></span></p>
+        <h1 class="room-title">ROOM ID: <span id="host-id"></span></h1>
         <button id="copy-join-link">Copy Join Link</button>
     </header>
 
@@ -62,16 +65,16 @@
 
     <div id="Error"></div>
     <main id="gameArea">
-        <p id="gamemode"></p>
-        <div class="game-stats">
-            <span id="timer">000</span>
-            <span id="bomb-counter">000</span>
-            <span id="flag-counter">000</span>
-        </div>
-        <div class="flagControls">
-            <button id="toggle-flag">FLAG (SHFT)</button>
-        </div>
         <div class="container">
+            <p id="gamemode"></p>
+            <div class="game-stats">
+                <span id="timer">000</span>
+                <span id="bomb-counter">000</span>
+                <span id="flag-counter">000</span>
+            </div>
+            <div class="flagControls">
+                <button id="toggle-flag">FLAG (SHFT)</button>
+            </div>
             <div id="grid"></div>
         </div>
     </main>

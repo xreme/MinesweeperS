@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>MinesweeperS - Help</title>
+    <link rel="stylesheet" href="navbar.css">
+    <style>
+        :root {
+            --c-bg: #c0c0c0;
+            --c-shadow-dark: #808080;
+            --c-shadow-light: #ffffff;
+        }
+
+        body {
+            background-color: #002c03;
+            color: white;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-width: 600px;
+        }
+
+        .help-container {
+            background-color: var(--c-bg);
+            border-top: 3px solid var(--c-shadow-light);
+            border-left: 3px solid var(--c-shadow-light);
+            border-right: 3px solid var(--c-shadow-dark);
+            border-bottom: 3px solid var(--c-shadow-dark);
+            width: 80%;
+            max-width: 800px;
+            padding: 30px;
+            color: black;
+            margin-top: 50px;
+            text-align: left;
+        }
+
+        h1 {
+            font-family: 'Courier New', Courier, monospace;
+            margin-top: 0;
+        }
+
+        h2 {
+            border-bottom: 1px solid var(--c-shadow-dark);
+            padding-bottom: 5px;
+            margin-top: 25px;
+        }
+
+        ul {
+            padding-left: 20px;
+        }
+
+        li {
+            margin-bottom: 10px;
+        }
+
+        kbd {
+            background-color: #eee;
+            border-radius: 3px;
+            border: 1px solid #b4b4b4;
+            box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2), 0 2px 0 0 rgba(255, 255, 255, 0.7) inset;
+            color: #333;
+            display: inline-block;
+            font-size: 0.85em;
+            font-weight: 700;
+            line-height: 1;
+            padding: 2px 4px;
+            white-space: nowrap;
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="classic-navbar">
+        <a href="landing.html"><u>H</u>ome</a>
+        <a href="help.html"><u>H</u>elp</a>
+    </nav>
+
+    <div class="help-container">
+        <h1>MinesweeperS Help</h1>
+
+        <h2>Objective</h2>
+        <p>The goal of Minesweeper is to uncover all the squares on a grid that do not contain mines without being
+            "blown up" by clicking on a mine.</p>
+
+        <h2>Controls</h2>
+        <ul>
+            <li><strong>Left Click:</strong> Reveal a tile.</li>
+            <li><strong>Shift + Left Click / Right Click:</strong> Place a flag on a tile you suspect contains a mine.
+            </li>
+            <li><strong><kbd>C</kbd> Key:</strong> Toggle sidebar controls (Singleplayer).</li>
+            <li><strong><kbd>N</kbd> Key:</strong> Start a new game (Singleplayer).</li>
+        </ul>
+
+        <h2>Gameplay Tips</h2>
+        <ul>
+            <li>The number on a revealed tile shows how many mines are adjacent to it (including diagonals).</li>
+            <li>If you reveal a mine, the game is over!</li>
+            <li>Use flags to mark potential mines. You cannot reveal a flagged tile by accident.</li>
+            <li>The counters at the top show elapsed time and remaining mines/flags.</li>
+        </ul>
+
+        <h2>Multiplayer</h2>
+        <ul>
+            <li><strong>Host:</strong> Create a room and share the link or room code with friends.</li>
+            <li><strong>Client:</strong> Join a room using a shared link or by entering a room code.</li>
+            <li>Work together to clear the board!</li>
+        </ul>
+    </div>
+</body>
+
+</html>
