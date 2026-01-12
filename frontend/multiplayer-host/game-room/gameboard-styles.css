@@ -1,187 +1,186 @@
-:root{
-    --c2: rgb(255, 104, 98);
-    --tile-color: #272424;
-    --reveal-color: #ddddddce;
+:root {
+    /* Classic Minesweeper Colors */
+    --c-bg: #c0c0c0;
+    --c-shadow-dark: #808080;
+    --c-shadow-light: #ffffff;
+    --c-shadow-darker: #000000;
+    --c-tile-up: #c0c0c0;
+    --c-tile-down: #c0c0c0;
+    --c-text: #000000;
+    --c-red: #ff0000;
+
+    /* Number Colors */
+    --c-1: #0000ff;
+    --c-2: #008000;
+    --c-3: #ff0000;
+    --c-4: #000080;
+    --c-5: #800000;
+    --c-6: #008080;
+    --c-7: #000000;
+    --c-8: #808080;
 }
-body{
-    background-color: rgb(42, 42, 42);
-    min-width: 600px;
-    margin: 0 auto;
-    text-align: center;
-    max-width: 1000px;
-    padding: 5px;
-}
-h1, h2, h3,p{
-    font-family: Sixtyfour Convergence, Arial, Helvetica, sans-serif; 
-}
-*{
-    color: var(--c2);
-    font-family: Sixtyfour Convergence; 
-    /* outline: 1px solid blue; */
-}
-input, button{
-    color: var(--c2);
-}
-main{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 0px;
-}
-h1{
-    font-size: 3rem;
-}
-h2{
-    font-size: 3rem;
-}
-h3{
-    font-size: 2.5rem;
-}
-h3:hover{
-    background-color: lightgreen;
-}
-aside{
-    padding: 10px;
-    outline: 2px solid var(--c2) 
-}
-a{
-    text-decoration:none
-}
-a:hover{
-    background-color: var(--c2);
-}
+
 .container {
-    max-width: 900vw;
-    max-height: 90vw;
+    padding: 10px;
+    border-top: 3px solid var(--c-shadow-dark);
+    border-left: 3px solid var(--c-shadow-dark);
+    border-right: 3px solid var(--c-shadow-light);
+    border-bottom: 3px solid var(--c-shadow-light);
+    background-color: var(--c-bg);
+    margin-top: 10px;
+    max-width: fit-content;
     overflow: auto;
-}
-.flagControls{
-    width: 60%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 10px;
-}
-.controls{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-}
-.difficulty{
-    background-color:rgba(0, 0, 0, 0);
-    border: 1px solid var(--c2);
-    color: var(--c2);
-    height: 100%;
-    width: 100%;
-    padding: 5px;
-}
-.difficulty:hover{
-    background-color: rgba(255, 103, 98, 0.355);
-}
-#grid {
-    display: grid;
-    grid-template-columns: repeat(var(--grid-cols, 10), var(--tile-size,50px));
-    gap: 0px;
-    margin: 20px auto;
-    width: fit-content;
-    margin: 2px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.8);
-    border-radius: 4px;
-}
-#new-game, #toggle-flag{
-    background-color:rgba(0, 0, 0, 0);
-    border: 2px solid var(--c2);
-    color: var(--c2);
-    height: 100%;
-    width: 100%;
-    padding: 5px;
-}
-#toggle-flag{
-    width: 50%;
-    margin: 10px;
-}
-.diffChoice{
-    display: flex;
-
-}
-#toggle-flag:hover{
-    background-color: rgba(255, 103, 98, 0.355);
-}
-#new-game:hover{
-    background-color: rgba(255, 103, 98, 0.11);
-}
-.input-block *{
-    margin: 2px;
-}
-.input-block{
-    margin: 15px;
-}
-.input-block input{
-    background-color: rgba(0, 0, 0, 0);
-    border: none;
-    color: var(--c2);
-    font-family: Sixtyfour Convergence, Arial, Helvetica, sans-serif; 
-    border: 2px solid rgb(255, 104, 98);
-    width: 100%;
-    padding: 5px;
-}
-.tile {
-    width: var(--tile-size,50px);
-    height: var(--tile-size,50px);
-    background: var(--tile-color);
-    border: 1px solid rgb(143, 107, 107);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    font-family: 'Courier New', Courier, monospace;
-    user-select: none;
-    -webkit-user-select: none; /* Safari */
-    -moz-user-select: none; /* Firefox */
-    -ms-user-select: none; /* IE10+/Edge */
-}
-
-.tile:hover {
-    background: #ccc;
-}
-.tile:hover {
-    border: 1px solid blue;
-}
-
-
-.revealed {
-    background: var(--reveal-color);
-    font-weight: 1000;
-}
-
-.flagged {
-    background: rgba(255, 221, 221, 0.66);
 }
 
 .game-stats {
     display: flex;
-    justify-content: space-around;
-    margin: 10px;
-    padding: 10px;
-    border: 2px solid var(--c2);
-    color: var(--c2);
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--c-bg);
+    border-top: 2px solid var(--c-shadow-dark);
+    border-left: 2px solid var(--c-shadow-dark);
+    border-right: 2px solid var(--c-shadow-light);
+    border-bottom: 2px solid var(--c-shadow-light);
+    padding: 6px;
+    margin-bottom: 6px;
+    width: 100%;
 }
 
-.game-stats span {
-    font-family: 'Sixtyfour Convergence', monospace;
-    padding: 5px 10px;
+#timer,
+#bomb-counter,
+#flag-counter {
+    background-color: #000;
+    color: var(--c-red);
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 24px;
+    font-weight: bold;
+    padding: 2px 4px;
+    min-width: 80px;
+    text-align: right;
+    border-top: 1px solid var(--c-shadow-dark);
+    border-left: 1px solid var(--c-shadow-dark);
+    border-right: 1px solid var(--c-shadow-light);
+    border-bottom: 1px solid var(--c-shadow-light);
+}
+
+.flagControls {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding: 5px;
+}
+
+#toggle-flag {
+    background-color: var(--c-bg);
+    border-top: 2px solid var(--c-shadow-light);
+    border-left: 2px solid var(--c-shadow-light);
+    border-right: 2px solid var(--c-shadow-dark);
+    border-bottom: 2px solid var(--c-shadow-dark);
+    color: black;
+    font-weight: bold;
+    padding: 5px 20px;
+    cursor: pointer;
+    font-family: inherit;
+}
+
+#toggle-flag:active {
+    border-top: 2px solid var(--c-shadow-dark);
+    border-left: 2px solid var(--c-shadow-dark);
+    border-right: 2px solid var(--c-shadow-light);
+    border-bottom: 2px solid var(--c-shadow-light);
+    padding: 6px 19px 4px 21px;
+}
+
+#grid {
+    display: grid;
+    grid-template-columns: repeat(var(--grid-cols, 10), var(--tile-size, 25px));
+    gap: 0;
+    border-top: 3px solid var(--c-shadow-dark);
+    border-left: 3px solid var(--c-shadow-dark);
+    border-right: 3px solid var(--c-shadow-light);
+    border-bottom: 3px solid var(--c-shadow-light);
+    width: fit-content;
+}
+
+.tile {
+    width: var(--tile-size, 25px);
+    height: var(--tile-size, 25px);
+    background-color: var(--c-tile-up);
+    border-top: 3px solid var(--c-shadow-light);
+    border-left: 3px solid var(--c-shadow-light);
+    border-right: 3px solid var(--c-shadow-dark);
+    border-bottom: 3px solid var(--c-shadow-dark);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 900;
+    font-size: calc(var(--tile-size, 25px) * 0.7);
+    font-family: 'Verdana', sans-serif;
+    cursor: default;
+    user-select: none;
+    color: black;
+}
+
+.tile:active:not(.revealed) {
+    border-top: 1px solid var(--c-shadow-dark);
+    border-left: 1px solid var(--c-shadow-dark);
+    border-right: none;
+    border-bottom: none;
+    padding-top: 2px;
+    padding-left: 2px;
+}
+
+.revealed {
+    background-color: var(--c-tile-down);
+    border: 1px solid var(--c-shadow-dark);
+    border-top: 1px solid var(--c-shadow-dark);
+    border-left: 1px solid var(--c-shadow-dark);
+    border-right: none;
+    border-bottom: none;
+}
+
+.flagged {
+    color: red;
 }
 
 .mine {
-    background: #f00;
+    background-color: var(--c-bg);
+    color: black;
 }
-.revealed[data-value="1"] { color: blue; }
-.revealed[data-value="2"] { color: green; }
-.revealed[data-value="3"] { color: red; }
-.revealed[data-value="4"] { color: darkblue; }
-.revealed[data-value="5"] { color: darkred; }
-.revealed[data-value="6"] { color: teal; }
-.revealed[data-value="7"] { color: black; }
-.revealed[data-value="8"] { color: gray; }
+
+.tile[style*="background-color: red"] {
+    background-color: red !important;
+}
+
+/* Number Colors for Multi-player compatibility */
+.revealed[data-value="1"] {
+    color: var(--c-1);
+}
+
+.revealed[data-value="2"] {
+    color: var(--c-2);
+}
+
+.revealed[data-value="3"] {
+    color: var(--c-3);
+}
+
+.revealed[data-value="4"] {
+    color: var(--c-4);
+}
+
+.revealed[data-value="5"] {
+    color: var(--c-5);
+}
+
+.revealed[data-value="6"] {
+    color: var(--c-6);
+}
+
+.revealed[data-value="7"] {
+    color: var(--c-7);
+}
+
+.revealed[data-value="8"] {
+    color: var(--c-8);
+}

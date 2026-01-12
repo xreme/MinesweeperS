@@ -8,17 +8,15 @@
     <script type="module" src="gameboard.js"></script>
     <link href="gameboard-styles.css" rel="stylesheet">
     <link href="game-room.css" rel="stylesheet">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Sixtyfour+Convergence&display=swap" rel="stylesheet">
 </head>
 
 <body>
-    <h1> Game Room</h1>
-    <a href="../../landing.html">HOME</a>
-    <p>ROOM ID: <span id="host-id"></span></p>
-
-    <button id="copy-join-link">Copy Link</button>
+    <h1>Game Room</h1>
+    <header>
+        <a href="../../landing.html">HOME</a>
+        <p>ROOM ID: <span id="host-id"></span></p>
+        <button id="copy-join-link">Copy Join Link</button>
+    </header>
 
     <div id="room-details"></div>
     <p>Connected Clients: <span id="client-count">0</span></p>
@@ -29,11 +27,9 @@
         </h1>
         <div id="message-container">
         </div>
-        <hr>
         <div id="chat-inputs">
             <input id="message-input" autocomplete="off"><button id="sendChat">SEND</button>
         </div>
-        <hr>
         <p>Game Controls</p>
         <div class="controls">
             <div class="input-block">
@@ -68,9 +64,9 @@
     <main id="gameArea">
         <p id="gamemode"></p>
         <div class="game-stats">
-            <span id="timer">Time: 0s</span>
-            <span id="bomb-counter">Bombs: 0</span>
-            <span id="flag-counter">Flags: 0</span>
+            <span id="timer">000</span>
+            <span id="bomb-counter">000</span>
+            <span id="flag-counter">000</span>
         </div>
         <div class="flagControls">
             <button id="toggle-flag">FLAG (SHFT)</button>

@@ -4,48 +4,41 @@
 <head>
     <title>MinesweeperS</title>
     <link rel="stylesheet" href="landing-styles.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Sixtyfour+Convergence&display=swap" rel="stylesheet">
-    <script src="landing.js"></script>
+    <script src="landing.js" defer></script>
 
 </head>
 
 <body>
     <main>
-        <center>
+        <div id="options">
+            <h1>MinesweeperS</h1>
 
-            <div id="options">
-                <h1>
-                    MinesweeperS
-                </h1>
-                <h2>
-                    SINGLEPLAYER
-                </h2>
+            <section>
+                <h2>SINGLEPLAYER</h2>
                 <a href="./singleplayer/gameboard.html">
                     <h3>PLAY</h3>
                 </a>
-                <h2>
-                    Multiplayer
-                </h2>
+            </section>
+
+            <section>
+                <h2>Multiplayer</h2>
                 <a href="./multiplayer-host/start-room/start-room.html">
-                    <h3> START ROOM </h3>
+                    <h3>START ROOM</h3>
                 </a>
                 <a href="./multiplayer-client/join-room/join-room.html">
-                    <h3>
-                        JOIN ROOM
-                    </h3>
+                    <h3>JOIN ROOM</h3>
                 </a>
-                <div id="info">
-                    <p>Connection Config:<span id="config-server"></span><span><button
-                                id="reset-config">Reset</button></span></p>
-                    <p><a href="https://github.com/xreme/MinesweeperS/blob/main/README.md#Multiplayer"> What is
-                            STUN/TURN?</a></p>
-                </div>
-                <br>
-                <p>Ver. 1.1.1</p>
+            </section>
+
+            <div id="info">
+                <p>Connection Config: <span id="config-server"></span> <span><button
+                            id="reset-config">Reset</button></span></p>
+                <p><a href="https://github.com/xreme/MinesweeperS/blob/main/README.md#Multiplayer" target="_blank">What
+                        is STUN/TURN?</a></p>
             </div>
-        </center>
+
+            <p>Ver. 1.1.1</p>
+        </div>
     </main>
 </body>
 
