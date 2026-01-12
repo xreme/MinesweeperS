@@ -36,4 +36,37 @@
 /* Adjust body padding to account for fixed navbar */
 body {
     padding-top: 40px !important;
+    padding-bottom: 40px !important;
+}
+
+.classic-footer {
+    background-color: #c0c0c0;
+    border-top: 2px solid #808080;
+    border-left: none;
+    border-right: none;
+    border-bottom: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 8px 10px;
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    z-index: 1000;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 0.85rem;
+    color: #000;
+}
+
+.classic-footer a,
+.classic-footer a:visited {
+    color: #000 !important;
+    text-decoration: underline;
+    margin-left: 5px;
+}
+
+.classic-footer a:hover {
+    color: #000080 !important;
 }
