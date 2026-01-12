@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>MinesweeperS</title>
     <link rel="stylesheet" href="styles.css">
@@ -8,23 +9,25 @@
     <link href="https://fonts.googleapis.com/css2?family=Sixtyfour+Convergence&display=swap" rel="stylesheet">
     <script type="module" src="game.js"></script>
 </head>
+
 <body>
     <header>
+        <h1>MinesweeperS</h1>
         <a href="../landing.html">
-            <h1>MinesweeperS</h1>
+            <p>Home</p>
         </a>
     </header>
     <div class="">
-        <div class="diffChoice">
-            <button class="difficulty" id="easy">EASY</button>
-            <button class="difficulty" id="medium">MEDIUM</button>
-            <button class="difficulty" id="hard">HARD</button>
-        </div>
         <aside>
             <div id="broswer-stats">
                 <p id="gamesPlayed"></p>
                 <p id="wins"></p>
                 <p id="streak"></p>
+                <div class="diffChoice">
+                    <button class="difficulty" id="easy">EASY</button>
+                    <button class="difficulty" id="medium">MEDIUM</button>
+                    <button class="difficulty" id="hard">HARD</button>
+                </div>
             </div>
             <div class="controls">
                 <div class="input-block">
@@ -33,17 +36,17 @@
                 </div>
                 <div class="input-block">
                     <p>Bomb Count</p>
-                    <input id="bomb-count" type="number" size= "2" max="1000" min="10" autocomplete="off">
+                    <input id="bomb-count" type="number" size="2" max="1000" min="10" autocomplete="off">
                 </div>
                 <div class="input-block">
-                   <p>New Game</p> 
+                    <p>New Game</p>
                     <button id="new-game">Start</button>
                 </div>
             </div>
             <div id="Error">
                 <p></p>
             </div>
-           
+
         </aside>
         <main id="gameArea">
             <div class="game-stats">
@@ -52,6 +55,7 @@
                 <span id="flag-counter">Flags: 0</span>
             </div>
             <div class="flagControls">
+                <button id="toggle-controls">CONTROLS (C)</button>
                 <button id="toggle-flag">FLAG (SHFT)</button>
             </div>
             <div class="container">
@@ -61,4 +65,5 @@
     </div>
 
 </body>
+
 </html>

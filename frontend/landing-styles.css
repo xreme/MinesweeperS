@@ -1,10 +1,17 @@
-body{
+body {
     background-color: rgb(42, 42, 42);
 }
-h1, h2, h3, p, button{
-    font-family: Sixtyfour Convergence, Arial, Helvetica, sans-serif; 
-    color: rgb(255, 104, 98);;
+
+h1,
+h2,
+h3,
+p,
+button {
+    font-family: Sixtyfour Convergence, Arial, Helvetica, sans-serif;
+    color: rgb(255, 104, 98);
+    ;
 }
+
 h1 {
     font-size: clamp(2rem, 5vw, 4rem);
 }
@@ -15,15 +22,20 @@ h2 {
 
 h3 {
     font-size: clamp(1rem, 2vw, 1.5rem);
+    outline: 2px solid rgb(255, 104, 98);
+    border-radius: 2;
+    padding: 10px;
 }
 
-a{
-    text-decoration:none
+a {
+    text-decoration: none
 }
-h3:hover{
+
+h3:hover {
     background-color: lawngreen;
 }
-main{
+
+main {
     display: flex;
     flex-direction: column;
     width: 100%;
@@ -31,25 +43,30 @@ main{
     justify-content: center;
     align-items: center;
 }
-#options{
-    outline:12px double rgb(255, 104, 98);
+
+#options {
+    outline: 12px double rgb(255, 104, 98);
     border-radius: 2;
     padding: 20px;
     max-height: 80vw;
 }
-#reset-config{
-    background-color:rgba(0, 0, 0, 0);
+
+#reset-config {
+    background-color: rgba(0, 0, 0, 0);
     border: 2px solid rgb(255, 104, 98);
     color: rgb(255, 104, 98);
     height: 100%;
     margin-left: 10px;
 }
-#reset-config:hover{
+
+#reset-config:hover {
     background-color: rgba(255, 103, 98, 0.355);
 }
-#info{
+
+#info {
     line-height: 0;
 }
-#info a{
+
+#info a {
     text-decoration: underline;
 }
