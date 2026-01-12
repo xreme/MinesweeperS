@@ -28,6 +28,8 @@
 body {
     background-color: #002c03;
     /* Dark background outside the game window */
+    width: 100vw;
+    overflow: auto;
     min-width: 600px;
     margin: 5;
     height: 100vh;
@@ -49,6 +51,14 @@ span,
 button,
 input {
     font-family: inherit;
+}
+
+.app_container{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
 }
 
 /* Main Game Window (reusing 'main' indirectly or container logic) */
@@ -103,6 +113,7 @@ header p {
     margin: 0;
     color: #7398f4;
     font-family: 'Courier New', Courier, monospace;
+    outline: 3px solid #7398f4;
     /* Retro feel */
 }
 
