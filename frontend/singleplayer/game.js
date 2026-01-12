@@ -241,14 +241,10 @@ document.getElementById('toggle-flag').addEventListener('click', () => {
 });
 
 document.getElementById('new-game').addEventListener('click', () => {
-    if (checkValues()) {
-        displayError("")
-        incrementGamesPlayedCounter()
-        initGame();
-        createGrid();
-        document.getElementById('gameArea').style.visibility = 'visible'
-        scrollToBottom()
-    }
+    startNewGame()
+});
+document.getElementById('quick-start').addEventListener('click', () => {
+    startNewGame()
 });
 document.getElementById('toggle-controls').addEventListener('click', () => {
     document.querySelector('aside').classList.toggle('hidden');
@@ -262,6 +258,9 @@ window.addEventListener('keydown', (e) => {
     if (e.key.toLowerCase() === 'c') {
         document.querySelector('aside').classList.toggle('hidden');
     }
+    if (e.key.toLowerCase() === 'n') {
+        startNewGame()
+    }
 });
 window.addEventListener('keyup', (e) => {
     if (e.key === 'Shift' && game.getFlagMode()) {
@@ -269,6 +268,17 @@ window.addEventListener('keyup', (e) => {
         statusDisplay.style.backgroundColor = 'rgba(255, 103, 98, 0)'
     }
 });
+
+function startNewGame() {
+    if (checkValues()) {
+        displayError("")
+        incrementGamesPlayedCounter()
+        initGame();
+        createGrid();
+        document.getElementById('gameArea').style.visibility = 'visible'
+        scrollToBottom()
+    }
+}
 
 // stat tracking
 function updateWins() {
