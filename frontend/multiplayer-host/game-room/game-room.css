@@ -42,9 +42,42 @@ header {
     text-align: center;
 }
 
+.room-title {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin: 0;
+}
+
 #host-id {
     color: #ffff00;
     font-weight: bold;
+}
+
+#copy-room-code {
+    background: transparent;
+    border: none;
+    color: #ffff00;
+    font-size: 2.2rem;
+    cursor: pointer;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.1s;
+    line-height: 1;
+}
+
+#copy-room-code svg {
+    display: block;
+}
+
+#copy-room-code:hover {
+    transform: scale(1.1);
+}
+
+#copy-room-code:active {
+    transform: scale(0.9);
 }
 
 #copy-join-link {
