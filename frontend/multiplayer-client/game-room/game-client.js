@@ -5,9 +5,9 @@ const iceConfig = {
     config: {
         iceServers: [
             {
-              urls: "turn:global.relay.metered.ca:80",
-              username: "",
-              credential: "",
+                urls: "turn:global.relay.metered.ca:80",
+                username: "",
+                credential: "",
             },
         ],
     },
@@ -20,7 +20,7 @@ function getPeerConfig() {
         if (turnConfig && turnConfig.username && turnConfig.password) {
             iceConfig.config.iceServers[0].username = turnConfig.username;
             iceConfig.config.iceServers[0].credential = turnConfig.password;
-            
+
             console.log('Using custom ICE configuration with TURN');
             return iceConfig;
         }
@@ -32,7 +32,7 @@ function getPeerConfig() {
 }
 
 const config = getPeerConfig() || null
-const clientPeer = config ? new Peer(config): new Peer()
+const clientPeer = config ? new Peer(config) : new Peer()
 
 //const clientPeer = new Peer();
 let activeConnection;
@@ -43,7 +43,7 @@ const sendBtn = document.getElementById("sendChat")
 clientPeer.on('error', (err) => {
     console.error('Peer connection error:', err);
     if (err.type === 'peer-unavailable') {
-       alert('Unable to connect to host. Please check room code.');
+        alert('Unable to connect to host. Please check room code.');
         setTimeout(() => {
             sessionStorage.removeItem('roomCode');
             window.location.href = '../join-room/join-room.html';
@@ -58,31 +58,31 @@ clientPeer.on('open', (id) => {
 clientPeer.on('error', (err) => {
     console.error('Peer error:', err);
 });
-function sendDetails(){
-    let info = {name:playerName} 
-    let data = {header:"userInfo",body:info}
+function sendDetails() {
+    let info = { name: playerName }
+    let data = { header: "userInfo", body: info }
     let obj = JSON.stringify(data)
     activeConnection.send(obj)
 }
-function sendChat(message){
-    let data = {header:"chatMessage",body:message}
+function sendChat(message) {
+    let data = { header: "chatMessage", body: message }
     let obj = JSON.stringify(data)
     activeConnection.send(obj)
 }
-export function sendData(obj){
+export function sendData(obj) {
     let data = JSON.stringify(obj)
     activeConnection.send(data)
 }
-function handleData(data){
+function handleData(data) {
     //console.log("data:", data)
-    try{
+    try {
         var obj = JSON.parse(data)
     }
-    catch(err){
+    catch (err) {
         console.log(err);
         return;
     }
-    switch(obj.header){
+    switch (obj.header) {
         case 'hostInfo':
             hostInfo = obj;
             displayHostInfo();
@@ -100,7 +100,7 @@ function handleData(data){
             console.log("Uknown Header:", data)
     }
 }
-function displayHostInfo(){
+function displayHostInfo() {
     //console.log("host info", hostInfo)
     let roomLbl = document.getElementById("roomDisplay");
     let hostName = hostInfo.body.name
@@ -108,11 +108,18 @@ function displayHostInfo(){
     roomLbl.textContent = `${hostName}'s Room`
 
 }
-function handleChat(data){
+export function showWaitingIndicator() {
+    document.getElementById("waiting-indicator").style.display = "flex";
+}
+export function hideWaitingIndicator() {
+    document.getElementById("waiting-indicator").style.display = "none";
+}
+function handleChat(data) {
     appendMessage(data.from, data.messageContent)
 }
-function handleGameStart(obj){
-    switch(obj.gamemode){
+function handleGameStart(obj) {
+    hideWaitingIndicator();
+    switch (obj.gamemode) {
         case "VS":
             startVSGame(obj.gameInstance);
             break;
@@ -137,8 +144,9 @@ function connectToHost() {
     connection.on('open', () => {
         console.log('Connected to host');
         activeConnection = connection;
-        sendDetails(); 
-        
+        sendDetails();
+        showWaitingIndicator();
+
         connection.on('data', (data) => {
             handleData(data);
         });
@@ -154,19 +162,19 @@ function connectToHost() {
         setTimeout(connectToHost, 5000); // Attempt reconnection
     });
 }
-function appendMessage(sender,message){
+function appendMessage(sender, message) {
     const messageContainer = document.getElementById('message-container');
     const messageElement = document.createElement('div');
     const contentElement = document.createElement('p')
     const senderElement = document.createElement('p')
-    
+
     messageElement.className = 'message';
     senderElement.className = 'sender';
     contentElement.className = 'content';
 
     contentElement.textContent = message;
     senderElement.textContent = `${sender}:`;
-    
+
     messageElement.appendChild(senderElement);
     messageElement.appendChild(contentElement);
     messageContainer.appendChild(messageElement);
@@ -185,11 +193,11 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('message-input').value = '';
     });
 
-    window.addEventListener('keypress', (e)=>{
-        if (e.key === 'Enter'){
+    window.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') {
             const message = document.getElementById('message-input').value;
             sendChat(message)
-            document.getElementById('message-input').value = ''; 
+            document.getElementById('message-input').value = '';
         }
     })
 });

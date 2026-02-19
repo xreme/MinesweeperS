@@ -1,13 +1,13 @@
 import { minesweeper } from "../../../cicada.js";
 import { startGame, clickTile } from "./gameboard.js";
-import { sendData } from "./game-client.js";
+import { sendData, showWaitingIndicator } from "./game-client.js";
 import { setGamemodeLbl } from "./game-room.js";
 
 // document.addEventListener('DOMContentLoaded',()=>{
 //     var game = minesweeper(10,10,10)
 //     startGame(game, null, null)
 // })
-export function startVSGame(gameInfo){
+export function startVSGame(gameInfo) {
     var game = minesweeper(
         gameInfo.gridWidth,
         gameInfo.gridLength,
@@ -15,9 +15,9 @@ export function startVSGame(gameInfo){
         gameInfo.grid
     )
     setGamemodeLbl('VS Mode')
-    startGame(game, (data)=>handleWin(data), (data)=>handleLoss(data), gameInfo.grid)
+    startGame(game, (data) => handleWin(data), (data) => handleLoss(data), gameInfo.grid)
 }
-export function startCoopGame(gameInfo){
+export function startCoopGame(gameInfo) {
     var game = minesweeper(
         gameInfo.gridWidth,
         gameInfo.gridLength,
@@ -25,10 +25,10 @@ export function startCoopGame(gameInfo){
         gameInfo.grid
     )
     setGamemodeLbl('CO-OP')
-    startGame(game, (data)=>handleWin(data), (data)=>handleLoss(data), 'CO-OP',(data)=>coopTileClick(data))
-    
+    startGame(game, (data) => handleWin(data), (data) => handleLoss(data), 'CO-OP', (data) => coopTileClick(data))
+
 }
-function handleLoss(details){
+function handleLoss(details) {
     sendData({
         header: "gameResult",
         body: {
@@ -36,8 +36,9 @@ function handleLoss(details){
             time: details.time
         }
     })
+    showWaitingIndicator()
 }
-function handleWin(details){
+function handleWin(details) {
     sendData({
         header: "gameResult",
         body: {
@@ -45,18 +46,19 @@ function handleWin(details){
             time: details.time
         }
     })
+    showWaitingIndicator()
 }
-export function coopTileClick(data){
+export function coopTileClick(data) {
     console.log(data)
     sendData({
-        header:"CoopAction",
-        body:{
+        header: "CoopAction",
+        body: {
             action: 'click',
             data: data
         }
     })
 }
-export function handleCoopAction(data){
+export function handleCoopAction(data) {
     let obj = JSON.parse(data)
-    clickTile(obj.body.data.row,obj.body.data.col,obj.body.data.flagMode )
+    clickTile(obj.body.data.row, obj.body.data.col, obj.body.data.flagMode)
 }
