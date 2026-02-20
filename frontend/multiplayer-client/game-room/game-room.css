@@ -28,8 +28,76 @@ body {
 h1 {
     font-family: 'Courier New', Courier, monospace;
     font-size: 2.5rem;
-    margin-bottom: 10px;
+    margin-bottom: 5px;
     color: white;
+}
+
+header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.room-title {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin: 0;
+}
+
+#room-id {
+    color: #ffff00;
+    font-weight: bold;
+}
+
+#copy-room-code {
+    background: transparent;
+    border: none;
+    color: #ffff00;
+    font-size: 2.2rem;
+    cursor: pointer;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.1s;
+    line-height: 1;
+}
+
+#copy-room-code svg {
+    display: block;
+}
+
+#copy-room-code:hover {
+    transform: scale(1.1);
+}
+
+#copy-room-code:active {
+    transform: scale(0.9);
+}
+
+#copy-join-link {
+    background-color: var(--c-bg);
+    border-top: 2px solid var(--c-shadow-light);
+    border-left: 2px solid var(--c-shadow-light);
+    border-right: 2px solid var(--c-shadow-dark);
+    border-bottom: 2px solid var(--c-shadow-dark);
+    color: black;
+    padding: 5px 15px;
+    font-family: inherit;
+    font-size: 0.9rem;
+    cursor: pointer;
+    margin-bottom: 20px;
+}
+
+#copy-join-link:active {
+    border-top: 2px solid var(--c-shadow-dark);
+    border-left: 2px solid var(--c-shadow-dark);
+    border-right: 2px solid var(--c-shadow-light);
+    border-bottom: 2px solid var(--c-shadow-light);
+    padding: 6px 14px 4px 16px;
 }
 
 #waiting-indicator {

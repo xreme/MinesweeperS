@@ -103,9 +103,11 @@ function handleData(data) {
 function displayHostInfo() {
     //console.log("host info", hostInfo)
     let roomLbl = document.getElementById("roomDisplay");
+    let roomIdLbl = document.getElementById("room-id");
     let hostName = hostInfo.body.name
 
     roomLbl.textContent = `${hostName}'s Room`
+    roomIdLbl.textContent = hostId;
 
 }
 export function showWaitingIndicator() {
